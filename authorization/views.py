@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 
-from .forms import LoginForm, SignUpForm
+from authorization.forms import LoginForm, SignUpForm
 from .tokens import account_activation_token
 
 # Create your views here.

@@ -22,8 +22,9 @@
     db:
       container_name: postgres
       image: postgres
+      restart: always
       volumes:    
-        - ./postgres_data:/var/lib/postgresql/data
+        - postgres_data:/var/lib/postgresql/data
       environment:
         - POSTGRES_HOST_AUTH_METHOD=trust
         - POSTGRES_DB=${SQL_NAME}

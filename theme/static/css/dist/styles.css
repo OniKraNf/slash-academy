@@ -1984,6 +1984,10 @@ select {
   margin-bottom: auto;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -1994,6 +1998,10 @@ select {
 
 .mt-40 {
   margin-top: 10rem;
+}
+
+.mt-\[50px\] {
+  margin-top: 50px;
 }
 
 .mt-auto {
@@ -2103,10 +2111,6 @@ select {
   display: none;
 }
 
-.h-1 {
-  height: 0.25rem;
-}
-
 .h-\[110px\] {
   height: 110px;
 }
@@ -2123,6 +2127,10 @@ select {
   height: 330px;
 }
 
+.h-\[350px\] {
+  height: 350px;
+}
+
 .h-\[500px\] {
   height: 500px;
 }
@@ -2131,8 +2139,16 @@ select {
   height: 100vh;
 }
 
+.max-h-\[400px\] {
+  max-height: 400px;
+}
+
 .max-h-\[500px\] {
   max-height: 500px;
+}
+
+.max-h-\[50px\] {
+  max-height: 50px;
 }
 
 .w-\[250px\] {
@@ -2141,6 +2157,10 @@ select {
 
 .w-\[320px\] {
   width: 320px;
+}
+
+.w-\[600px\] {
+  width: 600px;
 }
 
 .w-\[this-is\\\\\] {
@@ -2163,12 +2183,36 @@ select {
   width: 100vw;
 }
 
-.max-w-\[510px\] {
-  max-width: 510px;
+.w-\[500px\] {
+  width: 500px;
+}
+
+.w-\[550px\] {
+  width: 550px;
 }
 
 .max-w-\[100px\] {
   max-width: 100px;
+}
+
+.max-w-\[250px\] {
+  max-width: 250px;
+}
+
+.max-w-\[450px\] {
+  max-width: 450px;
+}
+
+.max-w-\[500px\] {
+  max-width: 500px;
+}
+
+.max-w-\[600px\] {
+  max-width: 600px;
+}
+
+.max-w-\[550px\] {
+  max-width: 550px;
 }
 
 .flex-1 {
@@ -2213,16 +2257,6 @@ select {
 
 .border-separate {
   border-collapse: separate;
-}
-
-.rotate-180 {
-  --tw-rotate: 180deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.rotate-90 {
-  --tw-rotate: 90deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .\!transform {
@@ -2727,6 +2761,10 @@ select {
   gap: 1.25rem;
 }
 
+.gap-\[50px\] {
+  gap: 50px;
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -3130,6 +3168,10 @@ select {
   border-width: 0.1px;
 }
 
+.border-\[1px\] {
+  border-width: 1px;
+}
+
 .border-x {
   border-left-width: 1px;
   border-right-width: 1px;
@@ -3166,6 +3208,10 @@ select {
 
 .border-t-2 {
   border-top-width: 2px;
+}
+
+.border-t-\[1px\] {
+  border-top-width: 1px;
 }
 
 .border-solid {
@@ -3378,16 +3424,6 @@ select {
   padding-right: 0.875rem;
 }
 
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
@@ -3402,8 +3438,24 @@ select {
   padding-bottom: 0.5rem;
 }
 
+.pb-\[100px\] {
+  padding-bottom: 100px;
+}
+
+.pb-\[10px\] {
+  padding-bottom: 10px;
+}
+
 .pb-\[150px\] {
   padding-bottom: 150px;
+}
+
+.pb-\[4px\] {
+  padding-bottom: 4px;
+}
+
+.pb-\[6px\] {
+  padding-bottom: 6px;
 }
 
 .pl-6 {
@@ -3505,8 +3557,8 @@ select {
   font-size: 14px;
 }
 
-.text-\[15px\] {
-  font-size: 15px;
+.text-\[50px\] {
+  font-size: 50px;
 }
 
 .text-lg {
@@ -3958,24 +4010,6 @@ select {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-.transition-colors {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.duration-300 {
-  transition-duration: 300ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
-.duration-500 {
-  transition-duration: 500ms;
 }
 
 .ease-in {
@@ -5777,28 +5811,8 @@ select {
   }
 }
 
-.hover\:border-black:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
-.hover\:bg-black:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-white:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .hover\:font-bold:hover {
   font-weight: 700;
-}
-
-.hover\:text-black:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .before\:hover\:text-center:hover::before {

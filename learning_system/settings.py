@@ -59,17 +59,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'slash_academy.apps.SlashAcademyConfig',
     'courses.apps.CoursesConfig',
-    'cart.apps.CartConfig',
     'authorization.apps.AuthorizationConfig',
     'tailwind',
     'theme',
     'django_browser_reload',
-    'corsheaders',
-    'fontawesomefree',
+    'webinars',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -94,12 +91,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',
             ],
         },
     },
 ]
 
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 WSGI_APPLICATION = 'learning_system.wsgi.application'
 
 # Database
@@ -186,5 +183,3 @@ STRIPE_SECRET_KEY=env('STRIPE_SECRET_KEY')
 PRODUCT_PRICE = 'prod_PoXOfNkJhFsiz3'
 
 REDIRECT_DOMAIN = 'http://127.0.0.1:8000'
-
-CORS_ORIGIN_ALLOW_ALL = True
