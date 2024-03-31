@@ -1,0 +1,28 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+    <section class="h-[500px] w-screen flex justify-center">
+        <div class="flex flex-col gap-5 flex-1 justify-center items-center text-center text-white max-w-[510px]">
+            <h1 class="text-5xl bg-white text-[#141414ea] p-3 rounded-md">Welcome to <span class="bg-black rounded-md text-white px-2 py-1">/</span> academy</h1>
+            <p>Here you can learn anything you want. </br>Below you can write the name of the course.</p> 
+            <input placeholder="Enter course" class="bg-black flex rounded-md "/>
+        </div>
+    </section>
+    <section class="top-courses">
+        <div class="flex flex-row gap-10 container justify-center items-start text-white">
+            {% for course in courses %}
+            <a href="{% url 'courses:course_detail' course.slug %}">
+                <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto">
+                    <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[220px] object-cover"/>
+                    <div class="p-3 flex flex-col gap-1 text-[14px] justify-between h-[110px]">
+                        <p class="text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.name}}</p>
+                        <p class="text-[#2d2d2d] mb-auto text-[12px] whitespace-pre-line overflow-ellipsis overflow-hidden">{{course.description}} </p>
+                        <p class="flex flex-row mt-auto justify-between align-bottom text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.name}} <span>{{course.price}}$</span></p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock content %}

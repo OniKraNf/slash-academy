@@ -1,0 +1,39 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="flex flex-col items-center justify-center h-screen w-screen text-white pb-[150px]">
+        <form method="post" class="flex flex-col gap-5">
+            {% csrf_token %}
+            <div class="flex flex-col">
+                {{ form.username.label }}
+                {{ form.username }}
+                {% for error in form.username.errors %}
+                    <p class="text-[#ff1d1d]">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="flex flex-col">
+                {{ form.email.label }}
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                    <p class="text-red-500">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="flex flex-col">
+                {{ form.password1.label }}
+                {{ form.password1 }}
+                {% for error in form.password1.errors %}
+                    <p class="text-red-500">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="flex flex-col">
+                {{ form.password2.label }}
+                {{ form.password2 }}
+                {% for error in form.password2.errors %}
+                    <p class="text-red-500">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <button type="submit" class="text-xl bg-black border-[#a2a6c4] border-[0.1px] py-[5px] rounded-md">Sign up</button>
+        </form>
+    </div>
+{% endblock content %}

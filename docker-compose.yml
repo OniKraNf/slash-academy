@@ -1,0 +1,62 @@
+  version: '3.8'
+
+  services:
+
+    web:
+      container_name: web
+      build: .
+      command: python manage.py runserver 0.0.0.0:8000
+      volumes:
+        - .:/app
+      env_file:
+        - .env 
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+      environment:
+        - DB_HOST=$${HOST}
+        - DB_NAME=$${SQL_NAME}
+        - DB_USER=$${SQL_USER}
+        - DB_PASSWORD=$${SQL_PASSWORD}
+    db:
+      container_name: postgres
+      image: postgres
+      volumes:    
+        - ./postgres_data:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_HOST_AUTH_METHOD=trust
+        - POSTGRES_DB=${SQL_NAME}
+        - POSTGRES_USER=${SQL_USER}
+        - POSTGRES_PASSWORD=${SQL_PASSWORD}
+        - POSTGRES_HOST=${HOST}
+
+    redis:
+      container_name: redis
+      image: "redis:alpine"
+      restart: always
+      command: redis-server
+      volumes:
+        - .:/redis-vol:/data  
+      ports:
+        - 6379:6379
+
+    celery:
+      container_name: celery
+      build: .
+      command: celery -A learning_system worker -l INFO
+      volumes:
+        - .:/app
+      depends_on:
+        - web
+        - redis
+        - db
+      environment:
+        - CELERY_BROKER=redis://redis:6379/0
+        - CELERY_BACKEND=redis://redis:6379/0
+
+  volumes:
+    postgres_data:
+
+
+

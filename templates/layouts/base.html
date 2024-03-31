@@ -1,0 +1,57 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Codenest</title>
+        <link rel="stylesheet" href="{% static 'global.css' %}">
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+        {% tailwind_css %}
+    </head>
+<body>
+    <nav class="bg-[#030014] text-white text-xl absolute left-0 right-0">
+        <ul class="flex flex-row justify-between items-center py-5 container">
+            <div class="flex">
+                / academy
+            </div>
+            <div class="flex flex-row gap-3 justify-center">
+                <li>
+                    <a class="" href="/">Home</a>
+                </li>
+                <li>
+                    <a class="" href="">Webinars</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <p class="" href="#">{{ user.username }}</p>
+                    <a class="" href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'cart_summary' %}" class="flex border-white border-2 rounded-md px-2 transition-colors duration-300 hover:bg-white hover:text-black hover:border-black">
+                        <button type="submit" class="text-[15px]">
+                            <i class="fas fa-shopping-cart fa-xs"></i>
+                            Cart
+                            <span>
+                                0
+                            </span>
+                        </button>
+                    </a>
+                {% else %}
+                    <li>
+                        <a class="" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a class="" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </div>
+        </ul>
+    </nav>
+    <div class="flex flex-col pt-20">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</body>
+</html>
