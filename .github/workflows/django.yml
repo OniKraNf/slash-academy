@@ -1,0 +1,61 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.11, 3.12]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Set up Environment Variables
+      env:
+        DEBUG: ${{ secrets.DEBUG }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SQL_NAME: ${{ secrets.SQL_NAME }}
+        SQL_USER: ${{ secrets.SQL_USER }}
+        SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        HOST: ${{ secrets.HOST }}
+        PORT: ${{ secrets.PORT }}
+        EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+        EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+        EMAIL_USE_TLS: ${{ secrets.EMAIL_USE_TLS }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+        STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
+        STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      run: |
+        echo "DEBUG=${DEBUG}" >> $GITHUB_ENV
+        echo "SECRET_KEY=${SECRET_KEY}" >> $GITHUB_ENV
+        echo "SQL_NAME=${SQL_NAME}" >> $GITHUB_ENV
+        echo "SQL_USER=${SQL_USER}" >> $GITHUB_ENV
+        echo "SQL_PASSWORD=${SQL_PASSWORD}" >> $GITHUB_ENV
+        echo "HOST=${HOST}" >> $GITHUB_ENV
+        echo "PORT=${PORT}" >> $GITHUB_ENV
+        echo "EMAIL_HOST=${EMAIL_HOST}" >> $GITHUB_ENV
+        echo "EMAIL_PORT=${EMAIL_PORT}" >> $GITHUB_ENV
+        echo "EMAIL_USE_TLS=${EMAIL_USE_TLS}" >> $GITHUB_ENV
+        echo "EMAIL_HOST_USER=${EMAIL_HOST_USER}" >> $GITHUB_ENV
+        echo "EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}" >> $GITHUB_ENV
+        echo "STRIPE_PUBLIC_KEY=${STRIPE_PUBLIC_KEY}" >> $GITHUB_ENV
+        echo "STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}" >> $GITHUB_ENV
+    - name: Run Tests
+      run: |
+        python manage.py test
