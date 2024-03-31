@@ -3,14 +3,14 @@
 
 {% block content %}
     <section class="h-[500px] w-screen flex justify-center">
-        <div class="flex flex-col gap-5 flex-1 justify-center items-center text-center text-white max-w-[510px]">
-            <h1 class="text-5xl bg-white text-[#141414ea] p-3 rounded-md">Welcome to <span class="bg-black rounded-md text-white px-2 py-1">/</span> academy</h1>
-            <p>Here you can learn anything you want. </br>Below yu can write the name of the course.</p> 
+        <div class="flex flex-col gap-5 flex-1 justify-center items-center text-center text-white ">
+            <h1 class="flex text-5xl gap-2 bg-white text-[#141414ea] p-3 rounded-md">Welcome to <span class="flex bg-black rounded-md text-white px-2 pb-[10px]">/</span> academy</h1>
+            <p>Here you can learn anything you want. </br>Below you can write the name of the course.</p> 
             <input placeholder="Enter course" class="bg-black flex rounded-md "/>
         </div>
     </section>
     <section class="top-courses">
-        <div class="flex flex-row gap-10 container justify-center items-start text-white">
+        <div class="flex flex-row gap-10 container-padding justify-center items-start text-white">
             {% for course in courses %}
             <a href="{% url 'courses:course_detail' course.slug %}">
                 <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto">

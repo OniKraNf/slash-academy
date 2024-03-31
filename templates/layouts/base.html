@@ -7,14 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Codenest</title>
         <link rel="stylesheet" href="{% static 'global.css' %}">
-        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
         {% tailwind_css %}
     </head>
 <body>
     <nav class="bg-[#030014] text-white text-xl absolute left-0 right-0">
-        <ul class="flex flex-row justify-between items-center py-5 container">
+        <ul class="flex flex-row justify-between items-center py-5 container-padding">
             <div class="flex">
                 / academy
             </div>
@@ -23,20 +20,11 @@
                     <a class="" href="/">Home</a>
                 </li>
                 <li>
-                    <a class="" href="">Webinars</a>
+                    <a class="" href="{% url 'webinars' %}">Webinars</a>
                 </li>
                 {% if user.is_authenticated %}
                     <p class="" href="#">{{ user.username }}</p>
                     <a class="" href="{% url 'logout' %}">Logout</a>
-                    <a href="{% url 'cart_summary' %}" class="flex border-white border-2 rounded-md px-2 transition-colors duration-300 hover:bg-white hover:text-black hover:border-black">
-                        <button type="submit" class="text-[15px]">
-                            <i class="fas fa-shopping-cart fa-xs"></i>
-                            Cart
-                            <span>
-                                0
-                            </span>
-                        </button>
-                    </a>
                 {% else %}
                     <li>
                         <a class="" href="{% url 'login' %}">Login</a>
