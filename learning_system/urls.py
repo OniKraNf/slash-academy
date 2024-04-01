@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('authorization.urls')),
     path('', include('courses.urls')),
     path('', include('slash_academy.urls')),
+    path("cart/", include('cart.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
     path('webinars/', include('webinars.urls'))
 ]

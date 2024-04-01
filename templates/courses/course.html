@@ -57,7 +57,8 @@
                     <div class="text-black p-4">
                         <div class="flex justify-between pb-2">
                             <p class="text-xl font-bold">{{course.price}}$</p>
-                            <button class="bg-black text-white p-1">Add to card</button>
+                            <button class="bg-black text-white p-1" type="button" 
+                            id="add-cart" value="{{ course.slug }}">Add to card</button>
                         </div>
                         <p class="font-bold">Includes: </p>
                         <ul class="list-disc px-3.5">
@@ -69,7 +70,6 @@
                 </div>
             </div>
         </div>
-
         <script>
             function toggleDropdown() {
                 var dropdownMenu = document.getElementById('dropdown-menu');
@@ -81,6 +81,28 @@
                     dropdownMenu.classList.remove('flex', 'flex-col');
                 }
             }
+        </script>
+        <script>
+            $(document).on('click', '#add-cart', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'cart_add' %}",
+                    data: {
+                        course_slug: $('#add-cart').val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        action: 'post',
+                    },
+
+                    success: function(json) {
+                        console.log(json)
+                    },
+
+                    error: function(xhr, errmsg, err) {
+
+                    }
+                });
+            });
         </script>
     </section>
 {% endblock content %}

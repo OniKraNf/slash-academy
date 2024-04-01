@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'slash_academy.apps.SlashAcademyConfig',
     'courses.apps.CoursesConfig',
     'authorization.apps.AuthorizationConfig',
+    'cart',
     'tailwind',
     'theme',
     'django_browser_reload',

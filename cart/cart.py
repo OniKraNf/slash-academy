@@ -9,3 +9,15 @@ class Cart():
         
         if 'session_key' not in request.session:
             cart = self.session['session_key'] = {}
+            
+        self.cart = cart
+    
+    def add(self, course):
+        course_slug = str(course.slug)
+        
+        if course_slug in self.cart:
+            pass
+        else:
+            self.cart[course_slug] = {'price': str(course.price)}
+            
+        self.session.modified = True
