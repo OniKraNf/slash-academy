@@ -8,6 +8,28 @@
     margin: 0 auto;
 }
 
+
 body {
     background-color: #030014;
+
+    
+}
+
+
+::-webkit-scrollbar {
+    width: 8px; /* Ширина полосы прокрутки */
+}
+
+::-webkit-scrollbar-track {
+    background: #030014; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #292735; /* Цвет ползунка */
+    border-radius: 10px; /* Скругление углов ползунка */
+}
+
+/* Отображение полосы прокрутки только при наведении курсора */
+::-webkit-scrollbar-thumb:hover {
+    background: #3b384b; /* Цвет ползунка при наведении курсора */
 }
