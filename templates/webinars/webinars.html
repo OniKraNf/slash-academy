@@ -11,65 +11,20 @@
 
         </div>
 
+
         <div class="flex flex-1 container-padding gap-[50px] justify-center mt-20">
-
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-
-                <p class="flex mt-auto pb-[10px]">webinar_name</p>
-
-                <a class="flex flex-1 justify-center items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] " target="_blank" href="{% url 'web_test_page' %}">
-                   
-                    <button class="">
-                        go
-                    </button>
-                </a>
-            </div>
-
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
-            </div>
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
-            </div>
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
+            <div class="grid grid-cols-4 gap-[50px] pb-[100px] max-w-[1200px]">
+                {% for webinar in webinars %}
+                <div class="flex flex-col flex-1 justify-center items-center  text-white border-[0.5px] max-w-[300px] rounded-lg">
+                    <img src="/media/{{webinar.image}}" class="w-full rounded-t-lg h-[300px] object-cover"/>
+                    <!-- <p class="flex mt-auto pb-[7px]">{{webinar.name}}</p> -->
+                    <a class="flex flex-1 justify-center items-center pb-[6px] rounded-b-lg transition-colors duration-300 ease-in-out hover:bg-gray-700 border-[#a2a6c4]  max-h-[500px] w-full" target="_blank" href="{% url 'web_test_page' %}">
+                        <button class="flex items-center text-[25px] mt-auto h-[80px]">{{webinar.name}}</button>
+                    </a> 
+                </div>
+                {% endfor %}
             </div>
         </div>
-
-        <div class="flex flex-1 container-padding gap-[50px] mt-[50px] pb-[100px] justify-center ">
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
-            </div>
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
-            </div>
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
-            </div>
-            <div class="flex flex-col flex-1 justify-center items-center border-[#a2a6c4]  text-white border-[1px] max-w-[250px] max-h-[400px] h-[350px] rounded-lg">
-                test
-                <button class="flex flex-1 justify-center mt-auto items-center pb-[6px] border-[#a2a6c4] border-t-[1px]  max-h-[50px] w-[250px] ">
-                    go
-                </button>
-            </div>
-        </div>
+        
     </section>
 {% endblock content %}

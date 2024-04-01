@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('slash_academy.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
     path('webinars/', include('webinars.urls'))
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
