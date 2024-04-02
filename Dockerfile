@@ -1,27 +1,23 @@
 # Use a Python base image
 FROM python:3.12.1
 
-# устанавливаем переменную окружения для Python, чтобы вывод был более читабельным
-ENV PYTHONUNBUFFERED 1
+# Install Node.js and npm
+RUN apt-get update && apt-get install -y nodejs npm
 
-# устанавливаем рабочую директорию в /app
+# Set the working directory
 WORKDIR /app
 
-# копируем файл requirements.txt в рабочую директорию
+# Copy the requirements.txt file
 COPY requirements.txt /app/
 
-# устанавливаем зависимости Python
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# копируем текущий каталог в рабочую директорию
+# Copy the rest of the application code
 COPY . /app/
 
-# опционально: выполняем миграции и собираем статику Django
-# RUN python manage.py migrate
-# RUN python manage.py collectstatic --noinput
-
-# открываем порт 8000 для веб-сервера Django
+# Expose the port
 EXPOSE 8000
 
-# команда для запуска сервера Django
+# Command to run the Django server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

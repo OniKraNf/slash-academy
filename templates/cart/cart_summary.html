@@ -1,7 +1,43 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 {% block content %}
-    <section>
-        
+    <section class="mt-20">
+        <div class="flex flex-col max-w-[450px] gap-3 rounded-md container-padding p-3 bg-white">
+            {% for course in courses %}
+                <div class="flex flex-row justify-between items-center">
+                    <div class="flex gap-2 items-center text-black">
+                        <img class="object-cover rounded-md max-h-10 h-10" src="/media/{{course.image}}" height="50" width="50"/>
+                        <p>{{course.name}}</p> 
+                        <p>{{course.price}}$</p>
+                    </div>
+                    <button id="cart-delete" value="{{ course.slug }}" type="button" class="bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
+                        Remove
+                    </button>
+                </div>
+            {% endfor %}
+            <p>Total price: {{total_price}}$</p>
+        </div>        
     </section>
+    <script>
+        $(document).on('click', '#cart-delete', function(e) {
+            e.preventDefault()
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'cart_delete' %}",
+                data: {
+                    course_slug: $('#cart-delete').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post',
+                },
+
+                success: function(json) {
+                    location.reload();
+                }, 
+
+                error: function(err) {
+                    console.log(err)
+                }
+            });
+        });
+    </script>
 {% endblock content %}

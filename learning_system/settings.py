@@ -92,12 +92,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
 ]
 
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 WSGI_APPLICATION = 'learning_system.wsgi.application'
 
 # Database

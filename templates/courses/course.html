@@ -95,7 +95,7 @@
                     },
 
                     success: function(json) {
-                        console.log(json)
+                        document.getElementById('cart_quantity').textContent = json.cart_quantity
                     },
 
                     error: function(xhr, errmsg, err) {

@@ -17,7 +17,7 @@
             <div class="flex">
                 / academy
             </div>
-            <div class="flex flex-row gap-3 justify-center">
+            <div class="flex flex-row gap-3 justify-center items-center">
                 <li>
                     <a class="" href="/">Home</a>
                 </li>
@@ -27,11 +27,11 @@
                 {% if user.is_authenticated %}
                     <p class="" href="#">{{ user.username }}</p>
                     <a class="" href="{% url 'logout' %}">Logout</a>
-                    <button class="border-white">
-                        <i class="fas fa-shopping-cart"></i>
+                    <a href="{% url 'cart_summary' %}" class="border-white border-2 rounded-md text-[18px] px-1 hover:bg-white hover:text-black">
+                        <i class="fas fa-shopping-cart fa-xs"></i>
                         Cart
-                        <span>0</span>
-                    </button>
+                        <span id="cart_quantity">{{cart|length}}</span>
+                    </a>
                 {% else %}
                     <li>
                         <a class="" href="{% url 'login' %}">Login</a>
