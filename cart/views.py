@@ -2,7 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 
 from courses.models import Course
+
+from slash_academy.models import Enroll
+
 from .cart import Cart
+
 
 # Create your views here.
 def cart_summary(request):
@@ -11,6 +15,7 @@ def cart_summary(request):
     quantity = cart.get_quantity()
     total_price = cart.get_total_price()
     return render(request, 'cart/cart_summary.html', {"courses": courses, 'quantity': quantity, 'total_price': total_price})
+
 
 def cart_add(request):
     cart = Cart(request)
@@ -31,3 +36,11 @@ def cart_delete(request):
         cart.delete(course=course)
         response = JsonResponse({'Course has been deleted: ': course.name})
         return response
+    
+
+def cart_buy(request):
+    cart = Cart(request)
+    if request.POST.get('action') == 'post':
+        course_slug = request.POST.get('course_slug')
+        course = get_object_or_404(Course, slug=course_slug)
+        # cart.

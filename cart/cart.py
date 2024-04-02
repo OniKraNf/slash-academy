@@ -4,6 +4,13 @@ from django.conf import settings
 from courses.models import Course
 
 class Cart():
+    """
+        This class used for cart feature on website
+        Args:
+            __init__ (self, request): initialization session_key or create it.
+            add (self, course): to add course in session_key.
+            
+    """
     def __init__(self, request):
         self.session = request.session
         

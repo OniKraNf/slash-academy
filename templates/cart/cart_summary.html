@@ -10,14 +10,41 @@
                         <p>{{course.name}}</p> 
                         <p>{{course.price}}$</p>
                     </div>
-                    <button id="cart-delete" value="{{ course.slug }}" type="button" class="bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
-                        Remove
-                    </button>
+                    <div class="flex flex-col gap-1 justify-center text-white">
+                        <button id="cart-buy" value="{{ course.slug }}" type="button" class="bg-[#2bd02b] rounded-md px-1 py-1 text-[12px]">
+                            Buy
+                        </button>
+                        <button id="cart-delete" value="{{ course.slug }}" type="button" class="bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
+                            Remove
+                        </button>
+                    </div>
                 </div>
             {% endfor %}
             <p>Total price: {{total_price}}$</p>
         </div>        
     </section>
+    <script>
+        $(document).on('click', '#cart-buy', function(e) {
+            e.preventDefault()
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'cart_buy' %}",
+                data: {
+                    course_slug: $('#cart-buy').val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post',
+                },
+
+                success: function(json) {
+                    console.log(json)
+                },
+                
+                error: function(error) {
+                    console.log(error)
+                }
+            });
+        });
+    </script>
     <script>
         $(document).on('click', '#cart-delete', function(e) {
             e.preventDefault()
