@@ -18,6 +18,9 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     
+    class Meta:
+        verbose_name_plural = 'Categories'  
+    
     def __str__(self) -> str:
         return self.name
     
@@ -28,7 +31,7 @@ class Category(models.Model):
 class Webinar(models.Model):
     name = models.CharField(max_length=100, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=1000, blank=False)
+    description = models.CharField(max_length=2000, blank=False)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     language = models.CharField(max_length=200)
     includes = models.CharField(max_length=2000)

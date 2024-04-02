@@ -11,10 +11,10 @@
                         <p>{{course.price}}$</p>
                     </div>
                     <div class="flex flex-col gap-1 justify-center text-white">
-                        <button id="cart-buy" value="{{ course.slug }}" type="button" class="bg-[#2bd02b] rounded-md px-1 py-1 text-[12px]">
+                        <button value="{{ course.slug }}" type="button" class="cart-buy bg-[#2bd02b] rounded-md px-1 py-1 text-[12px]">
                             Buy
                         </button>
-                        <button id="cart-delete" value="{{ course.slug }}" type="button" class="bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
+                        <button value="{{ course.slug }}" type="button" class="cart-delete bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
                             Remove
                         </button>
                     </div>
@@ -24,19 +24,21 @@
         </div>        
     </section>
     <script>
-        $(document).on('click', '#cart-buy', function(e) {
+        $(document).on('click', '.cart-buy', function(e) {
             e.preventDefault()
+            var courseSlug = $(this).val()
             $.ajax({
                 type: 'POST',
                 url: "{% url 'cart_buy' %}",
                 data: {
-                    course_slug: $('#cart-buy').val(),
+                    course_slug: courseSlug,
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     action: 'post',
                 },
 
                 success: function(json) {
                     console.log(json)
+                    location.reload();
                 },
                 
                 error: function(error) {
@@ -46,13 +48,14 @@
         });
     </script>
     <script>
-        $(document).on('click', '#cart-delete', function(e) {
+        $(document).on('click', '.cart-delete', function(e) {
             e.preventDefault()
+            var cartDelete = $(this).val()
             $.ajax({
                 type: 'POST',
                 url: "{% url 'cart_delete' %}",
                 data: {
-                    course_slug: $('#cart-delete').val(),
+                    course_slug: cartDelete,
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     action: 'post',
                 },
