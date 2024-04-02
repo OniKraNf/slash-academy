@@ -17,9 +17,9 @@
                         <span class="text-[15px]"> {{ webinars.0.description }} </span></p>
                 {% endif %}
             </div>
-            <div class="absolute gap-10 mt-[350px]">
+            <div class="absolute gap-1 mt-[350px]"style="display: flex; flex-direction: column;">
                 {% for webinar in webinars %}
-                    <p class="text-white text-left text-[20px] max-w-[150px] transition-colors duration-600 ease-in-out hover:text-yellow-200 additional-text hover:cursor-pointer webinar-name relative" onmouseover="showMainText(this, `{{ webinar.name }}`, `{{ webinar.description }}`)">{{ webinar.name }}</p>
+                    <a href="{% url 'web_test_page' %}" class=" text-white text-left text-[20px] max-w-[150px] transition-colors duration-600 ease-in-out hover:text-yellow-200 additional-text hover:cursor-pointer webinar-name relative" onmouseover="showMainText(this, `{{ webinar.name }}`, `{{ webinar.description }}`)">{{ webinar.name }}</a>
                 {% endfor %}
             </div>
         </div>
