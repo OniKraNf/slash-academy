@@ -14,7 +14,7 @@ def webinars(request):
 def web_test_page(request):
     return render(request, 'webinars/web_test_page.html')
 
-class WebinarView(ListView):
+class WebinarsView(ListView):
     model = Webinar
     template_name = 'webinars/webinars.html'
     context_object_name = 'webinars'
@@ -24,3 +24,8 @@ class WebinarView(ListView):
         
         context['webinars'] = self.model.objects.all().order_by('name')
         return context        
+    
+class WebinarPageView(DetailView):
+    model = Webinar
+    template_name = 'webinars/webinar_page.html'
+    context_object_name = 'webinar'

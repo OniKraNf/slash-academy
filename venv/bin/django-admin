@@ -1,4 +1,4 @@
-#!/Users/kranf/codenest/venv/bin/python3.12
+#!/home/contect/dev/slash-academy/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
