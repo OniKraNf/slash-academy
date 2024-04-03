@@ -7,7 +7,41 @@
     max-width: 1200px;
     margin: 0 auto;
 }
+.additional-text {
+    opacity: 0; /* Начальное состояние: текст невидим */
+    animation: fadeInOut 2s ease-in-out forwards; /* Добавляем CSS-анимацию для плавного появления и исчезновения */
+    text-align: right;
+}
 
+
+
+
+.header-text {
+    opacity: 0; /* Начальное состояние: текст невидим */
+    animation: fadeInOut 1s ease-in-out forwards; /* Добавляем CSS-анимацию для плавного появления и исчезновения */
+ 
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.additional-text.visible {
+    opacity: 1; /* когда добавляется класс .visible, текст становится видимым */
+}
+
+.header-text.visible {
+    opacity: 1; /* Начальное состояние: текст невидим */
+}
 
 body {
     background-color: #030014;
@@ -33,3 +67,4 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #3b384b; /* Цвет ползунка при наведении курсора */
 }
+

@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 {% block content %}
-    <section class="mt-20">
+    <section class="header-text mt-20">
         <div class="flex flex-col max-w-[450px] gap-3 rounded-md container-padding p-3 bg-white">
             {% for course in courses %}
                 <div class="flex flex-row justify-between items-center">
@@ -10,22 +10,52 @@
                         <p>{{course.name}}</p> 
                         <p>{{course.price}}$</p>
                     </div>
-                    <button id="cart-delete" value="{{ course.slug }}" type="button" class="bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
-                        Remove
-                    </button>
+                    <div class="flex flex-col gap-1 justify-center text-white">
+                        <button value="{{ course.slug }}" type="button" class="cart-buy bg-[#2bd02b] rounded-md px-1 py-1 text-[12px]">
+                            Buy
+                        </button>
+                        <button value="{{ course.slug }}" type="button" class="cart-delete bg-[#f53d3d] text-white rounded-md px-1 py-1 text-[12px]">
+                            Remove
+                        </button>
+                    </div>
                 </div>
             {% endfor %}
             <p>Total price: {{total_price}}$</p>
         </div>        
     </section>
     <script>
-        $(document).on('click', '#cart-delete', function(e) {
+        $(document).on('click', '.cart-buy', function(e) {
             e.preventDefault()
+            var courseSlug = $(this).val()
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'cart_buy' %}",
+                data: {
+                    course_slug: courseSlug,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post',
+                },
+
+                success: function(json) {
+                    console.log(json)
+                    location.reload();
+                },
+                
+                error: function(error) {
+                    console.log(error)
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click', '.cart-delete', function(e) {
+            e.preventDefault()
+            var cartDelete = $(this).val()
             $.ajax({
                 type: 'POST',
                 url: "{% url 'cart_delete' %}",
                 data: {
-                    course_slug: $('#cart-delete').val(),
+                    course_slug: cartDelete,
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     action: 'post',
                 },

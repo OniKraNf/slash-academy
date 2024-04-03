@@ -61,11 +61,12 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'authorization.apps.AuthorizationConfig',
     'cart',
-    'tailwind',
     'theme',
+    'tailwind',
     'django_browser_reload',
     'webinars',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,7 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart',
+                'cart.context_processors.cart', # This is helping us to initialization session_key straightaway on every page 
             ],
         },
     },

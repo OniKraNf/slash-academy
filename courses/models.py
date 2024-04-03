@@ -5,8 +5,10 @@ from django.dispatch import receiver
 from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.utils.text import slugify
+from django.contrib.auth import get_user_model
 from authorization.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 def course_image_path(instance, filename):
     return f'courses_images/{instance.name}/{filename}'

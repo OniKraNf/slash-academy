@@ -18,6 +18,9 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     
+    class Meta:
+        verbose_name_plural = 'Categories'  
+    
     def __str__(self) -> str:
         return self.name
     
@@ -28,13 +31,12 @@ class Category(models.Model):
 class Webinar(models.Model):
     name = models.CharField(max_length=100, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=1000, blank=False)
+    description = models.CharField(max_length=580, blank=False)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     language = models.CharField(max_length=200)
     includes = models.CharField(max_length=2000)
     slug = models.SlugField(max_length=100, unique=True, primary_key=True, auto_created=False)
     image = models.ImageField(upload_to=webinar_image_path, unique=True, default='trashhold.png', )
-    price = models.DecimalField(decimal_places=2, max_digits=5)
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
