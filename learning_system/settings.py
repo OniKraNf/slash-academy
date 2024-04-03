@@ -61,13 +61,12 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'authorization.apps.AuthorizationConfig',
     'cart',
-    'tailwind',
     'theme',
+    'tailwind',
     'django_browser_reload',
     'webinars',
 ]
 
-# NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
