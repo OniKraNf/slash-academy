@@ -67,10 +67,6 @@ INSTALLED_APPS = [
     'webinars',
 ]
 
-<<<<<<< HEAD
-=======
-# NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
->>>>>>> 1966e89efa4fcf6c2762f93ec852a339cb90aa4b
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
