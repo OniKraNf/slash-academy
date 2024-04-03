@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="mt-20">
+    <div class="flex">
+        <div class="container-padding justify-center">
+            <div id="header-text" class="header-text flex flex-1 justify-center bg-white p-3 rounded-md max-w-[1000px] max-h-[350px] text-[50px]">
+                <p class="text-black ">{{ webinar.name }}</p> 
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        var textWidth = $('#header-text').find('p').width(); // Получаем ширину текста внутри дива
+        $('#header-text').css('width', textWidth + 65); // Устанавливаем ширину дива с небольшим отступом
+    });
+</script>
+
+{% endblock content %}
