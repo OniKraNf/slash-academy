@@ -831,6 +831,10 @@ select {
   right: 0px;
 }
 
+.z-20 {
+  z-index: 20;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -924,6 +928,14 @@ select {
   height: 100vh;
 }
 
+.h-\[320px\] {
+  height: 320px;
+}
+
+.h-full {
+  height: 100%;
+}
+
 .max-h-10 {
   max-height: 2.5rem;
 }
@@ -960,6 +972,10 @@ select {
   width: 100vw;
 }
 
+.w-\[75\%\] {
+  width: 75%;
+}
+
 .max-w-\[1000px\] {
   max-width: 1000px;
 }
@@ -980,6 +996,10 @@ select {
   max-width: 600px;
 }
 
+.max-w-\[20\%\] {
+  max-width: 20%;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -994,6 +1014,10 @@ select {
 
 .list-disc {
   list-style-type: disc;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -1109,6 +1133,11 @@ select {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+.border-\[\#6b7280\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
 .bg-\[\#030014\] {
@@ -1283,6 +1312,11 @@ select {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .font-bold {
