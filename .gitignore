@@ -9,6 +9,8 @@ media
 # Backup files # 
 *.bak 
 
+__pycache__/
+
 # Postgresql
 postgres_data/
 
