@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.db.models.signals import post_delete
 from django.utils.text import slugify
 from authorization.models import User
+from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
@@ -48,6 +49,16 @@ class Webinar(models.Model):
         self.slug = slugify(self.name)
         super(Webinar, self).save(*args, **kwargs)
     
+class WebinarLesson(models.Model):
+    webinar = models.ForeignKey(Webinar, on_delete=models.CASCADE, related_name='webinarlessons')
+    name = models.CharField(max_length=100)
+    duration = models.FloatField(validators=[MinValueValidator(0.30), MaxValueValidator(30.00)])
+    video_url = models.CharField(max_length=200)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)
+
+def __str__(self) -> str:
+    return self.name
     
 @receiver(post_delete, sender=Webinar)
 def auto_delete_file_webinars(sender, instance, **kwargs):
