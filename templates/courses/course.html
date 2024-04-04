@@ -82,6 +82,7 @@
                 }
             }
         </script>
+        {% if user.is_authenticated  %}          
         <script>
             $(document).on('click', '#add-cart', function(e) {
                 e.preventDefault();
@@ -104,5 +105,7 @@
                 });
             });
         </script>
+        {% endif %}
+
     </section>
 {% endblock content %}
