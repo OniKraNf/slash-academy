@@ -928,16 +928,16 @@ select {
   max-height: 2.5rem;
 }
 
+.max-h-\[350px\] {
+  max-height: 350px;
+}
+
 .max-h-\[400px\] {
   max-height: 400px;
 }
 
 .max-h-\[500px\] {
   max-height: 500px;
-}
-
-.max-h-\[350px\] {
-  max-height: 350px;
 }
 
 .w-\[250px\] {
@@ -960,6 +960,10 @@ select {
   width: 100vw;
 }
 
+.max-w-\[1000px\] {
+  max-width: 1000px;
+}
+
 .max-w-\[150px\] {
   max-width: 150px;
 }
@@ -974,18 +978,6 @@ select {
 
 .max-w-\[600px\] {
   max-width: 600px;
-}
-
-.max-w-\[3000px\] {
-  max-width: 3000px;
-}
-
-.max-w-\[1200px\] {
-  max-width: 1200px;
-}
-
-.max-w-\[1000px\] {
-  max-width: 1000px;
 }
 
 .flex-1 {
@@ -1170,10 +1162,6 @@ select {
   padding: 1.25rem;
 }
 
-.p-2 {
-  padding: 0.5rem;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1209,11 +1197,6 @@ select {
   padding-bottom: 5px;
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1232,18 +1215,6 @@ select {
 
 .pt-20 {
   padding-top: 5rem;
-}
-
-.pt-1 {
-  padding-top: 0.25rem;
-}
-
-.pt-3 {
-  padding-top: 0.75rem;
-}
-
-.pt-2 {
-  padding-top: 0.5rem;
 }
 
 .pt-\[5px\] {
@@ -1312,10 +1283,6 @@ select {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-\[10px\] {
-  font-size: 10px;
 }
 
 .font-bold {
