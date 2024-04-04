@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block content %}
+  <section class="mt-20">
+    <div class="flex flex-col gap-10 justify-center items-center">
+        <p class="text-white text-5xl">Search courses</p>
+        <form method="get" action="{% url 'courses:courses_search' %}" class="flex flex-row gap-2 text-white">
+          {% csrf_token %} 
+          <input type="search" name="q" placeholder="Enter course" class="bg-black flex rounded-md"/>
+          <button type="submit" class="rounded-md border-[#6b7280] border-[1px] p-3">Search</button>
+        </form>
+        {% for course in courses %}
+          <a href="{% url 'courses:course_detail' course.slug %}">
+            <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto">
+                <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[220px] object-cover"/>
+                <div class="p-3 flex flex-col gap-1 text-[14px] justify-between h-[110px]">
+                    <p class="text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.name}}</p>
+                    <p class="text-[#2d2d2d] mb-auto text-[12px] whitespace-pre-line overflow-ellipsis overflow-hidden">{{course.description}} </p>
+                    <p class="flex flex-row mt-auto justify-between align-bottom text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.name}} <span>{{course.price}}$</span></p>
+                </div>
+            </div>
+         </a>
+        {% endfor %}
+    </div>
+  </section>
+{% endblock content %}

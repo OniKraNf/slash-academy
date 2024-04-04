@@ -2,26 +2,29 @@
 {% load static %}
 
 {% block content %}
-    <section class="h-[500px] header-text w-screen flex justify-center">
-        <div class="flex flex-col gap-5 flex-1 justify-center items-center text-center text-white ">
+    <section class="header-text w-screen flex flex-col gap-10 justify-center h-screen">
+        <div class="flex flex-col gap-5 justify-center items-center text-center text-white ">
             <h1 class="flex text-5xl gap-2 bg-white text-[#141414ea] p-3 rounded-md">Welcome to <span class="flex bg-black rounded-md pt-[5px] text-white px-2 pb-[10px]">/</span> academy</h1>
             <p>Here you can learn anything you want. </br>Below you can write the name of the course.</p> 
-            <input placeholder="Enter course" class="bg-black flex rounded-md "/>
+            <form method="get" action="{% url 'courses:courses_search' %}" class="flex flex-row gap-2">
+                {% csrf_token %} 
+                <input type="search" name="q" placeholder="Enter course" class="bg-black flex rounded-md"/>
+                <button type="submit" class="rounded-md border-[#6b7280] border-[1px] p-3">Search</button>
+            </form>
         </div>
-    </section>
-    <section class="top-courses">
+        <p class="flex justify-center text-white text-4xl">Top courses</p>
         <div class="flex flex-row gap-10 container-padding justify-center items-start text-white">
             {% for course in courses %}
-            <a href="{% url 'courses:course_detail' course.slug %}">
-                <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto">
-                    <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[220px] object-cover"/>
-                    <div class="p-3 flex flex-col gap-1 text-[14px] justify-between h-[110px]">
-                        <p class="text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.name}}</p>
-                        <p class="text-[#2d2d2d] mb-auto text-[12px] whitespace-pre-line overflow-ellipsis overflow-hidden">{{course.description}} </p>
-                        <p class="flex flex-row mt-auto justify-between align-bottom text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.name}} <span>{{course.price}}$</span></p>
+                <a href="{% url 'courses:course_detail' course.slug %}">
+                    <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto">
+                        <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[220px] object-cover"/>
+                        <div class="p-3 flex flex-col gap-1 text-[14px] justify-between h-[110px]">
+                            <p class="text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.name}}</p>
+                            <p class="text-[#2d2d2d] mb-auto text-[12px] whitespace-pre-line overflow-ellipsis overflow-hidden">{{course.description}} </p>
+                            <p class="flex flex-row mt-auto justify-between align-bottom text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.name}} <span>{{course.price}}$</span></p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
             {% endfor %}
         </div>
     </section>

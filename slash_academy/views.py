@@ -1,4 +1,5 @@
 from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView
 from courses.models import Course
@@ -12,6 +13,13 @@ class HomeListView(ListView):
     model = Course
     template_name = 'index.html'
     context_object_name = 'courses'
+    
+    def get_queryset(self) -> QuerySet[Any]:
+        query = self.request.GET.get('q', '')
+        if query:
+            return self.model.objects.filter(name__icontains=query)
+        else:
+            return self.model.objects.all()
     
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
