@@ -1,4 +1,5 @@
-from email.message import EmailMessage
+from django.core.mail import EmailMessage
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout, login, authenticate, get_user_model
@@ -25,7 +26,6 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
-    
 
 
 def activate_email(request, user, email):
@@ -39,9 +39,11 @@ def activate_email(request, user, email):
             'uid': urlsafe_base64_encode(force_bytes(user.pk)), # User id which we need to encode for security in bytes
             'token': account_activation_token.make_token(user),
         })
+    
     email = EmailMessage(
         subject, message, to=[email]
     )
+    
     email.send()
 
 

@@ -14,10 +14,16 @@ from django.utils.text import slugify
 class User(AbstractUser):
     email = models.CharField(unique=True)
     username = models.CharField(max_length=120, unique=True)
+    is_active = models.BooleanField(default=False)
     
     def __str__(self) -> str:
         return self.username
     
+    def save(self, *args, **kwargs):
+        if self.is_staff:
+            self.is_active = True
+        super().save(*args, **kwargs)
+        
     
 def user_directory_path(instance, file_name):
     return f'profiles_images/{instance.user.username}/{file_name}'
