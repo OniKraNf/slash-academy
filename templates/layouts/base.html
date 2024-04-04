@@ -12,7 +12,7 @@
         {% tailwind_css %}
     </head>
 <body>
-    <nav class="bg-[#030014] text-white text-xl absolute left-0 right-0">
+    <nav class="bg-[#030014] z-20 text-white text-xl absolute left-0 right-0">
         <ul class="flex flex-row justify-between items-center py-5 container-padding">
             <div class="flex">
                 / academy
@@ -25,8 +25,8 @@
                     <a class="" href="{% url 'webinars' %}">Webinars</a>
                 </li>
                 {% if user.is_authenticated %}
-                    <p class="" href="#">{{ user.username }}</p>
-                    <a class="" href="{% url 'logout' %}">Logout</a>
+                    <a href="/profile/{{request.user.profile.slug}}">{{ request.user.username }}</a>
+                    <a href="{% url 'logout' %}">Logout</a>
                     <a href="{% url 'cart_summary' %}" class="border-white border-2 rounded-md text-[18px] px-1 hover:bg-white hover:text-black">
                         <i class="fas fa-shopping-cart fa-xs"></i>
                         Cart
@@ -43,7 +43,7 @@
             </div>
         </ul>
     </nav>
-    <div class="flex flex-col overflow-x-hidden pt-20">
+    <div class="flex flex-col overflow-x-hidden">
         {% block content %}
 
         {% endblock content %}

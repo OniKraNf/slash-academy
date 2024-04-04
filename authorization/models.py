@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -24,9 +25,15 @@ def user_directory_path(instance, file_name):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    slug = models.SlugField(unique=True, max_length=100, blank=True)
     information = models.CharField(max_length=2000)
     image = models.ImageField(default='default.png', upload_to=user_directory_path)
     verified = models.BooleanField(default=False)
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(Profile, self).save(*args, **kwargs)
+
     
     def __str__(self) -> str:
         return f'username: {self.user.username} verified: {self.verified}'
