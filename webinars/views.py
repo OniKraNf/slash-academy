@@ -1,7 +1,7 @@
 from typing import Any
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Webinar
+from .models import Webinar, WebinarLesson
 from authorization.models import User
 from django.db.models import Sum
 # Create your views here.
@@ -10,9 +10,6 @@ from django.db.models import Sum
 #     template_name = "webinars/webinars.html"
 def webinars(request):
     return render(request, 'webinars/webinars.html')
-
-def web_test_page(request):
-    return render(request, 'webinars/web_test_page.html')
 
 class WebinarsView(ListView):
     model = Webinar
@@ -29,3 +26,10 @@ class WebinarPageView(DetailView):
     model = Webinar
     template_name = 'webinars/webinar_page.html'
     context_object_name = 'webinar'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        webinar = self.get_object()
+        webinarlessons = webinar.webinarlessons.all()  # Получаем все уроки для данного вебинара
+        context['webinarlessons'] = webinarlessons
+        return context

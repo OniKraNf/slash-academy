@@ -54,6 +54,7 @@ class WebinarLesson(models.Model):
     name = models.CharField(max_length=100)
     duration = models.FloatField(validators=[MinValueValidator(0.30), MaxValueValidator(30.00)])
     video_url = models.CharField(max_length=200)
+    lesson_description = models.CharField(max_length=1000, blank=False, default="No description available")
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 

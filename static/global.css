@@ -18,6 +18,11 @@
     border-width: 4px;
 }
 
+.button-clicked {
+    pointer-events: none; /* Делает кнопку неактивной */
+    background-color: white; /* Изменяет фоновый цвет на белый */
+}
+
 /* perfect parij */
 
 .header-text { 
