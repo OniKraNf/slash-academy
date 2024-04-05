@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'webinars',
     'user_profile',
+    'study_sandbox',
 ]
 
 
