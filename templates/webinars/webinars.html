@@ -9,20 +9,25 @@
             </div>
         </div>
         
-        <div class="container-padding">
-            <div class="absolute justify-end max-w-[600px] ml-[600px] w-[600px]">
+        <div class="container-padding ">
+            <!-- Добавляем строку поиска -->
+            
+        
+            <div class="absolute justify-end mt-[80px] ml-[600px] w-[600px]">
                 {% if webinars %}
                     <p class="text-white additional-text"> 
                         <span class="text-[80px]"> {{ webinars.0.name }} </span> <br>
                         <span class="text-[15px]"> {{ webinars.0.description }} </span></p>
                 {% endif %}
             </div>
-            <div class="absolute gap-1 mt-[350px]"style="display: flex; flex-direction: column;">
+            <div class="absolute mt-[100px] gap-1" style="display: flex; flex-direction: column;">
+                <input type="text" id="searchInput" placeholder="Поиск вебинаров..." class="text-white text-[20px] max-w-[300px] p-2 mb-4 bg-black rounded-md">
                 {% for webinar in webinars %}
-                    <a href="{% url 'webinar_detail' webinar.slug %}" class=" text-white text-left text-[20px] max-w-[150px] transition-colors duration-600 ease-in-out hover:text-yellow-200 additional-text hover:cursor-pointer webinar-name relative" onmouseover="showMainText(this, `{{ webinar.name }}`, `{{ webinar.description }}`)">{{ webinar.name }}</a>
+                    <a href="{% url 'webinar_detail' webinar.slug %}" class="text-white text-left text-[20px] max-w-[150px] transition-colors duration-600 ease-in-out hover:text-yellow-200 additional-text hover:cursor-pointer webinar-name relative" onmouseover="showMainText(this, `{{ webinar.name }}`, `{{ webinar.description }}`)">{{ webinar.name }}</a>
                 {% endfor %}
             </div>
         </div>
+        
         
         <script>
             window.onload = function() {
@@ -33,6 +38,7 @@
                     additionalTextElement.classList.add('visible');
                 }, 200); 
             }
+        
             function showMainText(element, mainText1, mainText2) {
                 var additionalTextElement = document.querySelector('.additional-text');
                 // Объединяем два текста в одну строку
@@ -43,8 +49,24 @@
                     additionalTextElement.classList.add('visible'); // Затем плавно показываем новый текст
                 }, 100); // Устанавливаем небольшую задержку перед показом нового текста
             }
-        </script
+            
+            document.getElementById('searchInput').addEventListener('keydown', function(event) {
+                if (event.keyCode === 13) { // Если нажата клавиша Enter
+                    var searchValue = this.value.trim().toLowerCase(); // Получаем значение из строки поиска и приводим его к нижнему регистру
+                    var webinarLinks = document.querySelectorAll('.webinar-name'); // Получаем все ссылки на вебинары
+                    webinarLinks.forEach(function(link) {
+                        var webinarName = link.textContent.toLowerCase(); // Получаем название вебинара и приводим его к нижнему регистру
+                        // Проверяем, содержит ли название вебинара введенный текст
+                        if (webinarName.includes(searchValue)) {
+                            link.style.display = 'block'; // Если содержит, то показываем ссылку
+                        } else {
+                            link.style.display = 'none'; // Если не содержит, то скрываем ссылку
+                        }
+                    });
+                }
+            });
+        </script>
+        
+        
     </section>
 {% endblock content %}
-
-
