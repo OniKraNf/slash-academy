@@ -6,11 +6,6 @@
         <div class="flex flex-col gap-5 justify-center items-center text-center text-white ">
             <h1 class="flex text-5xl gap-2 bg-white text-[#141414ea] p-3 rounded-md">Welcome to <span class="flex bg-black rounded-md pt-[5px] text-white px-2 pb-[10px]">/</span> academy</h1>
             <p>Here you can learn anything you want. </br>Below you can write the name of the course.</p> 
-            <form method="get" action="{% url 'courses:courses_search' %}" class="flex flex-row gap-2">
-                {% csrf_token %} 
-                <input type="search" name="q" placeholder="Enter course" class="bg-black flex rounded-md"/>
-                <button type="submit" class="rounded-md border-[#6b7280] border-[1px] p-3">Search</button>
-            </form>
         </div>
         <p class="flex justify-center text-white text-4xl">Top courses</p>
         <div class="flex flex-row gap-10 container-padding justify-center items-start text-white">
