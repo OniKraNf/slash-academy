@@ -56,10 +56,10 @@
                 {% for enroll in enrolled_courses %}
                     <div class="flex flex-row gap-3 bg-[#494d57] rounded-md p-3">
                         <img src="/media/{{enroll.course.image}}" class='object-cover' width="50" alt="">
-                        <div>
+                        <a href="{% url 'study-sandbox' enroll.course.slug %}">
                             <p>{{ enroll.course.name }}</p>
                             <p>Start: {{ enroll.created_at }}</p>
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
             </div>
