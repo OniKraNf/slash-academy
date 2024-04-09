@@ -37,6 +37,7 @@ class Course(models.Model):
     advantages = models.CharField(max_length=500)
     language = models.CharField(max_length=200)
     includes = models.CharField(max_length=2000)
+    placeholder = models.CharField(max_length=200, default='')
     slug = models.SlugField(max_length=100, unique=True, primary_key=True, auto_created=False)
     image = models.ImageField(upload_to=course_image_path, unique=True, default='trashhold.png', )
     price = models.DecimalField(decimal_places=2, max_digits=5)
@@ -62,6 +63,16 @@ class Lesson(models.Model):
     
     def __str__(self) -> str:
         return self.name
+    
+
+class LessonContent(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='lessons_content')
+    name = models.CharField(max_length=100)
+    text_content = models.CharField(max_length=2000, blank=True)
+    video_url = models.CharField(max_length=200, blank=True)
+    duration = models.FloatField(validators=[MinValueValidator(0.30), MaxValueValidator(30.00)])
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)
     
     
 @receiver(post_delete, sender=Course)
