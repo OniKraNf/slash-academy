@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Course, Lesson, Category
+from .models import Course, Lesson, Category, LessonContent
 
 # Register your models here.
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['name', 'is_active']
-    fields = ('name', 'author', 'category', 'description', 'advantages', 'language', 'includes', 'image', 'price', 'is_active', 'created_at', 'updated_at')
+    fields = ('name', 'author', 'category', 'placeholder', 'description', 'advantages', 'language', 'includes', 'image', 'price', 'is_active', 'created_at', 'updated_at')
     
     
 @admin.register(Lesson)
@@ -22,3 +22,8 @@ class LessonAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
     fields = ['name']
+    
+    
+@admin.register(LessonContent)    
+class LessonContentAdmin(admin.ModelAdmin):
+    list_display = ['name']

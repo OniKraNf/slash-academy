@@ -14,13 +14,6 @@ class HomeListView(ListView):
     template_name = 'index.html'
     context_object_name = 'courses'
     
-    def get_queryset(self) -> QuerySet[Any]:
-        query = self.request.GET.get('q', '')
-        if query:
-            return self.model.objects.filter(name__icontains=query)
-        else:
-            return self.model.objects.all()
-    
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['top_courses'] = self.model.objects.all().order_by('?')

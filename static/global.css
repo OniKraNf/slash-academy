@@ -18,6 +18,17 @@
     border-width: 4px;
 }
 
+.dropdown-content {
+    display: none;  position: absolute;  background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;  
+}
+  
+.dropdown-content.show {
+    display: block;  
+}
+
 .button-clicked {
     pointer-events: none; /* Делает кнопку неактивной */
     background-color: white; /* Изменяет фоновый цвет на белый */

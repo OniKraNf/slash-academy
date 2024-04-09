@@ -1,0 +1,46 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load filters %}
+
+{% block content %} 
+    <section>
+        <div class="flex justify-between items-start">
+            <div class="flex flex-col bg-white border-black w-full border-[0.5px] mt-20 z-30 p-4 gap-5">
+                <h1 class="font-bold text-2xl">Course content</h1>
+                <div class="flex flex-col gap-2">
+                    {% for lesson in lessons %}
+                    <div class="flex flex-col gap-2 dropdown">
+                        <button class="flex flex-col items-start drop-button" onclick="toggleDropdown('{{ lesson.id }}')">
+                            <p class="font-bold"">{{ lesson.name }}</p>
+                            <p class="text-[14px]">Quantity: {{ lesson.lessons_content.all|length}} | {{ lesson.lessons_content.all|total_duration }} min</p>
+                        </button>
+                        <div id="dropdown-menu-{{ lesson.id }}" class="gap-1 hidden flex-col border-[#363636] rounded-md p-1 border-2">
+                            {% for content in lesson.lessons_content.all %}
+                                <div onclick="changeVideo('{{content.video_url}}')" class="hover:bg-[#bbbbbb] rounded-md p-2">
+                                    <p>{{ content.name }}</p>
+                                    <p>{{ content.duration }} min</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="justify-end">
+                <iframe id="lesson-video" width="1000" height="700" src="{{ course.placeholder }}"></iframe>
+            </div>
+        </div>
+    </section>
+    <script>
+        function toggleDropdown(lessonId) {
+            var dropdownMenu = document.getElementById('dropdown-menu-' + lessonId);
+            dropdownMenu.classList.toggle('hidden');
+            dropdownMenu.classList.toggle('flex');
+        }
+
+        function changeVideo(videoUrl) {
+            var videoIframe = document.getElementById('lesson-video');
+            videoIframe.src = videoUrl;
+        }
+    </script>
+{% endblock content %}
