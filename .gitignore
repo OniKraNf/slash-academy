@@ -9,6 +9,9 @@ media
 # Postgresql
 postgres_data/
 
+#tailwind theme
+theme/static/css/dist
+
 # Backup files # 
 *.bak 
 

@@ -3,24 +3,84 @@
 
 {% block content %}
 
-<section class="mt-20 container-padding">
-    <div class="flex flex-col items-center">
-        <div class="">
-            <div id="header-text" class="header-text flex flex-1 justify-center bg-white p-3 rounded-md max-w-[1000px] max-h-[350px] text-[50px]">
-                <p class="text-black ">{{ webinar.name }}</p> 
-            </div>
-        </div>
-        <div class="header-text flex mt-10">
-            <p class="text-white text-center">{{ webinar.description }}</p>
+
+<section class="flex mt-[100px] header-text flex-col container-padding">
+    <div class="w-[1200px]">
+        <div id="header-text" class="flex justify-center bg-white p-3 rounded-md max-w-1200 max-h-[350px] text-[50px]">
+            <p class="text-black">{{ webinar.name }}</p> 
         </div>
     </div>
+    <div class="flex flex-row mt-20 justify-between ">
+        <div class="flex flex-col items-start">
+            <div class="flex flex-row justify-center ">
+                <div class="flex flex-col pr-7 items-start">
+                    {% for webinarlesson in webinarlessons %}
+                        {% with forloop.counter0 as index %}
+                            {% if forloop.first %}
+                                <button class="button-clicked bg-gray-600 text-[20px] mb-3 px-2 text-black text-left rounded-md transition-colors duration-600 ease-in-out hover:bg-white break-all" onclick="loadVideo('{{ webinarlesson.video_url }}', '{{ webinarlesson.lesson_description }}', this)">{{ webinarlesson.name }}</button>
+                            {% else %}
+                                <button class="bg-gray-600 text-[20px] mb-3 px-2 text-black text-left rounded-md transition-colors duration-600 ease-in-out hover:bg-white break-all" onclick="loadVideo('{{ webinarlesson.video_url }}', '{{ webinarlesson.lesson_description }}', this)">{{ webinarlesson.name }}</button>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+        <div class="flex flex-col items-end">
+            <div id="videoContainer" class="mb-5">
+                <!-- В этом блоке будет отображаться текущее видео -->
+            </div>
+            <div id="lessonDescription" class="mt-5 mb-20" style="max-width: 900px; margin: 0 auto;">
+                <!-- Описание урока будет отображаться здесь -->
+            </div>
+        </div>
+    </div>
+    
 </section>
 
 <script>
     $(document).ready(function() {
-        var textWidth = $('#header-text').find('p').width(); // Получаем ширину текста внутри дива
-        $('#header-text').css('width', textWidth + 65); // Устанавливаем ширину дива с небольшим отступом
+        var textWidth = $('#header-text').find('p').width(); 
+        $('#header-text').css('width', textWidth + 65); 
     });
+
+    window.onload = function() {
+        var defaultVideoUrl = "{{ webinarlessons.0.video_url }}";
+        var defaultLessonDescription = "{{ webinarlessons.0.lesson_description }}";
+        var defaultButton = document.querySelector('.button-clicked');
+        loadVideo(defaultVideoUrl, defaultLessonDescription, defaultButton);
+    };
+
+    function loadVideo(videoUrl, lessonDescription, button) {
+        var videoContainer = document.getElementById('videoContainer');
+        videoContainer.innerHTML = '<iframe width="900" height="500" src="' + videoUrl + '" frameborder="0" allowfullscreen></iframe>';
+
+        // Отображаем описание урока под видео
+        var lessonDescriptionElement = document.getElementById('lessonDescription');
+        lessonDescriptionElement.innerHTML = '<p class="text-white text-center" style="max-width: 900px;">' + lessonDescription + '</p>';
+
+        // Находим кнопку, на которую было нажато
+        var clickedButton = document.querySelector('.button-clicked');
+
+        // Если найдена предыдущая нажатая кнопка, убираем с неё класс и делаем её активной
+        if (clickedButton) {
+            clickedButton.classList.remove('button-clicked');
+            clickedButton.disabled = false;
+            clickedButton.style.backgroundColor = clickedButton.getAttribute('data-original-color');
+            clickedButton.style.color = 'black';
+        }
+
+        // Добавляем класс к текущей нажатой кнопке, чтобы пометить её как активную
+        button.classList.add('button-clicked');
+        // Делаем текущую кнопку неактивной и меняем её фон на белый
+        button.disabled = true;
+        button.setAttribute('data-original-color', button.style.backgroundColor); // Сохраняем исходный фоновый цвет кнопки
+        button.style.backgroundColor = 'white';
+        button.style.color = 'black'; // Возвращаем цвет текста к черному
+    }
 </script>
+
+
 
 {% endblock content %}
