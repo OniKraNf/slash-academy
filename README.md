@@ -1,3 +1,3 @@
-Demo slash-academy
+# Project Name
+Short description or tagline about the project.
 
-Docs will be updated
