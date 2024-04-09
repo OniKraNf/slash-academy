@@ -1,8 +1,15 @@
 # Slash Academy
 
+Used Tech Stack
+
+1. Django
+2. Postgresql
+3. Redis
+4. Celery
+
 ## Introduction
 
-This is a **slash academy** introduction to my project. It includes *italic* text and some ~~strikethrough~~ examples.
+This is a introduction to my project.
 
 ### Features
 
