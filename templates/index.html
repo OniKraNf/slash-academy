@@ -2,18 +2,40 @@
 {% load static %}
 
 {% block content %}
-    <section class="header-text w-screen flex flex-col gap-10 justify-center h-screen">
-        <div class="flex flex-col gap-5 justify-center items-center text-center text-white ">
-            <h1 class="flex text-5xl gap-2 bg-white text-[#141414ea] p-3 rounded-md">Welcome to <span class="flex bg-black rounded-md pt-[5px] text-white px-2 pb-[10px]">/</span> academy</h1>
-            <p>Here you can learn anything you want. </br>Below you can write the name of the course.</p> 
+    <section class="header-text container-padding flex flex-col gap-10 justify-center mt-10">
+        <div class="flex flex-row flex-1 w-full h-[950px] gap-5">
+            <div class="w-full rounded-[25px] flex flex-col h-[450px] max-h-[450px] gap-5 p-14 text-white bg-[#4e3eff]">
+                <h1 class="flex text-[60px] gap-2 rounded-md">Welcome to <div class="flex bg-black rounded-md px-2 pb-1 text-white">/</div> academy</h1>
+                <div class="flex flex-wrap max-w-[550px] gap-5 mt-auto">
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Programming</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Music</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Analytics</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Design</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Finance</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Cinema and Music</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Marketplaces</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Engineering</div>
+                    <div class="bg-white text-[#343434] p-2 rounded-[15px]">Psychology</div>
+                </div>
+            </div>
+            <div class="flex">
+                <img class="rounded-[25px] object-cover" width="800" src="https://static.vecteezy.com/system/resources/previews/033/540/048/large_2x/two-funny-cats-take-a-selfie-on-the-beach-humor-created-using-artificial-intelligence-free-photo.jpg" alt="">
+            </div>
         </div>
-        <p class="flex justify-center text-white text-4xl">Top courses</p>
-        <div class="flex flex-row gap-10 container-padding justify-center items-start text-white">
+        <form method="get" action="{% url 'courses:courses_search' %}" class="flex flex-row justify-center gap-2 px-14">
+            {% csrf_token %} 
+            <input type="search" name="q" placeholder="Enter course" class="bg-[#f2f2f2] border-[#b5b5b5] w-full text-white flex rounded-md py-3"/>
+            <button type="submit" class="rounded-md text-white bg-[#4e3eff] text-[16px] px-2 w-[150px]">Search</button>
+        </form>
+        <div class=" flex justify-center items-center">
+            <p class="rounded-[15px] bg-[#4e3eff] p-3 text-white text-4xl">Top courses</p>
+        </div>
+        <div class="flex flex-row gap-10 justify-center items-start text-white pb-10">
             {% for course in courses %}
                 <a href="{% url 'courses:course_detail' course.slug %}">
-                    <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto">
-                        <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[220px] object-cover"/>
-                        <div class="p-3 flex flex-col gap-1 text-[14px] justify-between h-[110px]">
+                    <div class="flex flex-col bg-[#ffffff] border-[#c6c6c6] border-2 w-[250px] h-[300px] overflow-hidden rounded-md mb-auto">
+                        <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[180px] object-cover"/>
+                        <div class="p-3 flex flex-col gap-1 text-[14px] justify-between h-[150px]">
                             <p class="text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.name}}</p>
                             <p class="text-[#2d2d2d] mb-auto text-[12px] whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.description}} </p>
                             <p class="flex flex-row mt-auto justify-between align-bottom text-black whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.name}} <span>{{course.price}}$</span></p>

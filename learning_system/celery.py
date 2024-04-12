@@ -9,8 +9,12 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'learning_system.settings')
 
 app = Celery('learning_system')  # Replace 'your_project' with your project's name.
 
+app.conf.broker_url = 'redis://redis:6379/0'
+
 # Configure Celery using settings from Django settings.py.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load tasks from all registered Django app configs.
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
+
+app.conf.broker_connection_retry_on_startup = True

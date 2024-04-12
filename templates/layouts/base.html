@@ -12,43 +12,7 @@
         {% tailwind_css %}
     </head>
 <body>
-    <nav class="bg-[#030014] z-20 text-white text-xl absolute left-0 right-0">
-        <ul class="flex flex-row justify-between items-center py-5 container-padding">
-            <div class="flex">
-                / academy
-            </div>
-            <div class="flex flex-row gap-3 justify-center items-center">
-                <li>
-                    <a class="" href="/">Home</a>
-                </li>
-                <li>
-                    <a class="" href="{% url 'webinars' %}">Webinars</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <a href="/profile/{{request.user.profile.slug}}">{{ request.user.username }}</a>
-                    <a href="{% url 'logout' %}">Logout</a>
-
-                {% else %}
-                    <li>
-                        <a class="" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li>
-                        <a class="" href="{% url 'signup' %}">Sign Up</a>
-                    </li>
-                {% endif %}
-                <form method="get" action="{% url 'courses:courses_search' %}" class="flex flex-row gap-2">
-                    {% csrf_token %} 
-                    <input type="search" name="q" placeholder="Enter course" class="bg-black flex rounded-md"/>
-                    <button type="submit" class="rounded-md text-[16px] px-2 border-[#6b7280] border-[1px]">Search</button>
-                </form>
-                <a href="{% url 'cart_summary' %}" class="flex items-center gap-1 border-[#6b7280] border-[1px] px-2 h-[40px] rounded-md text-[16px] hover:bg-white hover:text-black">
-                    <i class="fas fa-shopping-cart fa-xs"></i>
-                    Cart
-                    <span id="cart_quantity">{{cart|length}}</span>
-                </a>
-            </div>
-        </ul>
-    </nav>
+    {% include "layouts/navbar.html" %}
     <div class="flex flex-col overflow-x-hidden">
         {% block content %}
 

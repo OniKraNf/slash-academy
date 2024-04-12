@@ -2,74 +2,97 @@
 {% load static %}
 
 {% block content %}
-    <section class="on-top-course mt-20">
-        <div class="flex flex-row justify-between content-container">
-            <div class="flex flex-col text-white gap-10">
-                <div class="flex flex-col gap-5 bg-white p-3 text-black rounded-md">
-                    <h1 class="text-5xl">{{course.name}}</h1>
-                    <p class="text-2xl">{{course.description}}</p>
-                    <div class="flex flex-row gap-5">
-                        <p>Created on {{course.created_at|date}}</p>
-                        <p>Updated on {{course.updated_at|date}}</p> 
-                    </div>
-                </div>
-                <div class="flex flex-col gap-2 mt-40 text-black">
-                    <p class="text-3xl text-white">What i will learn?</p>
-                    <p class="bg-white rounded-md p-5">{{course.advantages}}</p>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <p class="text-3xl">Lessons for this course</p>
-                    <div class="bg-white p-3 text-black rounded-md">
-                        <div class="flex justify-between">
-                            <button onclick="toggleDropdown()" class="flex flex-row items-center"> Lessons
-                            </button>
-                            <div class="flex flex-row gap-2">
-                                {% if course.lessons.all|length == 1 %}
-                                    <p>{{course.lessons.all|length}} Lesson</p>
-                                {% elif course.lessons.all|length > 1 %}
-                                    <p>{{course.lessons.all|length}} Lessons</p>
-                                {% endif %}
-                                <p>{{total_duration|floatformat:0}} minute</p>
-                            </div>
-                        </div>
-                        <div id="dropdown-menu" class="hidden">
-                            {% for lesson in course.lessons.all %}
-                                <a>{{lesson.name}}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <p class="text-3xl">Description</p>
-                    <p class="bg-white text-black p-3 rounded-md">{{course.description}}</p>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <p class="text-3xl">About the author</p>
-                    <div class="flex flex-col gap-2 bg-white text-black rounded-md p-3">
-                        <p>Name {{course.author.username}}</p>
-                        <p>{{course_count}} Courses</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-row gap-10 justify-center items-start text-white">
-                <div class="flex flex-col bg-white border-white border-2 w-[320px] max-h-[500px] overflow-hidden rounded-md mb-auto">
-                    <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[260px] object-cover"/>
-                    <div class="text-black p-4">
-                        <div class="flex justify-between pb-2">
+    <section class="on-top-course flex flex-col gap-32 mt-20 content-container w-full mb-20">
+        <div class="flex text-white bg-[#222222] p-24 rounded-[25px]">
+            <!-- <div class="flex flex-row gap-10 justify-center"> -->
+                <!-- <div class="flex flex-col w-[320px] max-h-[500px] overflow-hidden rounded-md mb-auto"> -->
+                    <!-- <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[260px] object-cover"/> -->
+                    <!-- <div class="p-4"> -->
+                        <!-- <div class="flex justify-between pb-2">
                             <p class="text-xl font-bold">{{course.price}}$</p>
-                            <button class="bg-black text-white p-1" type="button" 
+                            <button class="p-1" type="button" 
                             id="add-cart" value="{{ course.slug }}">Add to card</button>
-                        </div>
-                        <p class="font-bold">Includes: </p>
+                        </div> -->
+                        <!-- <p class="font-bold">Includes: </p>
                         <ul class="list-disc px-3.5">
                             {% for item in includes %}
                                 <li>{{item}}</li>
                             {% endfor %}
-                        </ul>
+                        </ul> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+            <div class="flex flex-col text-white gap-5 w-full">
+                <div class="flex flex-row justify-between flex-1">
+                    <div class="flex flex-col gap-5 rounded-md">
+                        <p class="text-2xl">Start earning money in 7 months</p>
+                        <h1 class="text-7xl">{{course.name}}</h1>
+                        <div class="flex flex-row gap-5">
+                            <p>Created on {{course.created_at|date}}</p>
+                            <p>Updated on {{course.updated_at|date}}</p> 
+                        </div>
+                        <div class="flex items-center pt-5 pb-5 gap-5">
+                            <button class="bg-[#4e3eff] text-2xl rounded-md p-2 w-[300px]" type="button" 
+                            id="add-cart" value="{{ course.slug }}">Add to card</button>
+                            <p class="p-2 rounded-md text-2xl font-bold">{{course.price}}$</p>
+                        </div>
+                    </div>
+                    <div class="">
+                        <img src="/media/{{course.image}}" width="600" class="rounded-[25px] h-[420px] object-cover"/>
+                    </div>
+                </div>
+                <div class="flex flex-row gap-5 z-10 mt-10">
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] rounded-[25px] text-black px-5 h-[120px]">
+                        <p class="text-2xl">What i will learn?</p>
+                        <p class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.advantages}}</p>
+                    </div>
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
+                        <p class="text-2xl">Lessons</p>
+                        <div class="rounded-md">
+                            <div class="flex justify-between">
+                                <button onclick="toggleDropdown()" class="flex flex-row items-center"> Lessons
+                                </button>
+                                <div class="flex flex-row gap-2">
+                                    {% if course.lessons.all|length == 1 %}
+                                        <p class="whitespace-nowrap overflow-ellipsis 
+                                        overflow-hidden">{{course.lessons.all|length}} Lesson</p>
+                                    {% elif course.lessons.all|length > 1 %}
+                                        <p class="whitespace-nowrap overflow-ellipsis 
+                                        overflow-hidden">{{course.lessons.all|length}} Lessons</p>
+                                    {% endif %}
+                                    <p>{{total_duration|floatformat:0}}</p>
+                                </div>
+                            </div>
+                            <div id="dropdown-menu" class="hidden">
+                                {% for lesson in course.lessons.all %}
+                                    <a class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{lesson.name}}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
+                        <p class="text-2xl">Description</p>
+                        <p class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.description}}</p>
+                    </div>
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
+                        <p class="text-2xl">Author</p>
+                        <div class="flex flex-col gap-2 rounded-md">
+                            <p class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.username}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="flex flex-row px-40">
+            <div class="flex flex-col">
+                <p class="text-[52px] font-bold">Most Popular Language</p>
+                <p class="text-[20px] text-[#666]">{{course.description}}</p>
+            </div>
+            <img class="rounded-[25px]" src="https://intersog.co.il/handling/assets/uploads/2019/08/shutterstock_1225954372.jpg" width="600" alt="">
+        </div>
+        
+
+
         <script>
             function toggleDropdown() {
                 var dropdownMenu = document.getElementById('dropdown-menu');

@@ -3,15 +3,14 @@
 
 {% block content %}
   <section class="">
-    <div class="flex justify-center gap-20 mt-40 text-2xl text-white container-padding px-5">
-        <button onclick="switchMenu('profile-menu-button')" id="profile-menu-button" class="bg-[#494d57] hover:bg-[#494d57] rounded-md p-2 px-10">Profile</button>
-        <button onclick="switchMenu('courses-menu-button')" id="courses-menu-button" class="hover:bg-[#494d57] rounded-md p-2 px-10">Courses</button>
-        <button class="hover:bg-[#494d57] rounded-md p-2 px-10">Something...</button>
+    <div class="flex justify-center gap-20 mt-40 text-2xl text-black container-padding px-5">
+        <button onclick="switchMenu('profile-menu-button')" id="profile-menu-button" class="bg-[#4e3eff] text-white hover:bg-[#4e3eff] hover:text-white rounded-md p-2 px-10">Profile</button>
+        <button onclick="switchMenu('courses-menu-button')" id="courses-menu-button" class="hover:bg-[#4e3eff] hover:text-white rounded-md p-2 px-10">Courses</button>
     </div>
     <div>
         <div id="profile-menu" class="flex flex-row justify-center items-center gap-10 flex-1 text-white container-padding mt-20">
             <div class="flex flex-1 max-w-[20%]">
-                <div class="flex flex-col flex-1 bg-[#494d57] p-3 h-[320px] rounded-md">
+                <div class="flex flex-col flex-1 bg-[#4e3eff] p-3 h-[320px] rounded-md">
                     <div class="flex flex-col justify-center items-center h-full">
                         <img src="/media/{{profile.image}}" width="80" alt="profile">
                         <p> {{ profile.user.username }} </p>
@@ -20,15 +19,15 @@
                         <button id="profile-button" onclick="switchContent('profile-content')" class="flex justify-center bg-black text-white rounded-md mt-auto profile-border-active">
                             Profile
                         </button>
-                        <button id="activity-button" onclick="switchContent('activity-content')" class="flex justify-center bg-black text-white rounded-md mt-auto">
+                        <!-- <button id="activity-button" onclick="switchContent('activity-content')" class="flex justify-center bg-black text-white rounded-md mt-auto">
                             Activity
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
             <div class="w-[75%]">
                 <div class="flex flex-col gap-2">
-                    <div id="profile-content" class="bg-[#494d57] rounded-md p-3">
+                    <div id="profile-content" class="bg-[#4e3eff] rounded-md p-3">
                         <p class="text-xl font-bold">Bio Graph</p>
                         <p class="text-0.5xl">Username: {{profile.user.username}}</p>
                         <p class="text-0.5xl">Bio: {{profile.information}}</p>
@@ -38,7 +37,7 @@
                     <div id="activity-content" class="hidden">
                         <div class="grid grid-cols-2 gap-5">
                             {% for enroll in enrolled_courses %}
-                                <div class="flex flex-row gap-3 bg-[#494d57] rounded-md p-3">
+                                <div class="flex flex-row gap-3 bg-[#4e3eff] rounded-md p-3">
                                     <img src="/media/{{enroll.course.image}}" class='object-cover' width="50" alt="">
                                     <div>
                                         <p>{{ enroll.course.name }}</p>
@@ -54,7 +53,7 @@
         <div id="courses-menu" class="hidden container-padding mt-20 text-white">
             <div class="grid grid-cols-2 gap-5">
                 {% for enroll in enrolled_courses %}
-                    <div class="flex flex-row gap-3 bg-[#494d57] rounded-md p-3">
+                    <div class="flex flex-row gap-3 bg-[#4e3eff] rounded-md p-3">
                         <img src="/media/{{enroll.course.image}}" class='object-cover' width="50" alt="">
                         <a href="{% url 'study-sandbox' enroll.course.slug %}">
                             <p>{{ enroll.course.name }}</p>
@@ -78,8 +77,20 @@
             profileMenuContent.classList.toggle('hidden', targetId != 'profile-menu-button')
             coursesMenuContent.classList.toggle('hidden', targetId != 'courses-menu-button')
 
-            profileMenuButton.classList.toggle('bg-[#494d57]', targetId == 'profile-menu-button')
-            coursesMenuButton.classList.toggle('bg-[#494d57]', targetId != 'profile-menu-button')
+            profileMenuButton.classList.toggle('bg-[#4e3eff]', targetId == 'profile-menu-button')
+            coursesMenuButton.classList.toggle('bg-[#4e3eff]', targetId != 'profile-menu-button')
+
+            if (targetId === 'profile-menu-button') {
+                profileMenuButton.classList.add('text-white', 'bg-[#4e3eff]');
+                profileMenuButton.classList.remove('text-black', 'bg-white');
+                coursesMenuButton.classList.remove('text-white', 'bg-[#4e3eff]');
+                coursesMenuButton.classList.add('text-black', 'bg-white');
+            } else if (targetId === 'courses-menu-button') {
+                profileMenuButton.classList.remove('text-white', 'bg-[#4e3eff]');
+                profileMenuButton.classList.add('text-black', 'bg-white');
+                coursesMenuButton.classList.add('text-white', 'bg-[#4e3eff]');
+                coursesMenuButton.classList.remove('text-black', 'bg-white');
+            }
         }
 
         function switchContent(targetId) {

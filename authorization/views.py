@@ -10,6 +10,7 @@ from django.utils.encoding import force_bytes, force_str
 
 from authorization.forms import LoginForm, SignUpForm
 from .tokens import account_activation_token
+from .tasks import send_email_task
 
 # Create your views here.
 def activate(request, uidb64, token):
@@ -26,25 +27,6 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
-
-
-def activate_email(request, user, email):
-    current_site = get_current_site(request)
-    subject = 'Activation link has been sent to your email'
-    message = render_to_string(
-        'authorization/activate_email.html', 
-        {
-            'user': user,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)), # User id which we need to encode for security in bytes
-            'token': account_activation_token.make_token(user),
-        })
-    
-    email = EmailMessage(
-        subject, message, to=[email]
-    )
-    
-    email.send()
 
 
 def logout_view(request):
@@ -75,7 +57,8 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            activate_email(request, user, user.email)
+            current_site = get_current_site(request)
+            send_email_task.delay(user.id, user.email, current_site.domain)
             return redirect('/login/')
     else:
         form = SignUpForm()
