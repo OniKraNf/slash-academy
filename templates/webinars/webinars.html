@@ -12,14 +12,14 @@
         <div class="container-padding">
             <div class="absolute justify-end max-w-[600px] ml-[600px] w-[600px]">
                 {% if webinars %}
-                    <p class="text-white additional-text"> 
+                    <p class="text-black additional-text"> 
                         <span class="text-[80px]"> {{ webinars.0.name }} </span> <br>
                         <span class="text-[15px]"> {{ webinars.0.description }} </span></p>
                 {% endif %}
             </div>
             <div class="absolute gap-1 mt-[350px]"style="display: flex; flex-direction: column;">
                 {% for webinar in webinars %}
-                    <a href="{% url 'webinar_detail' webinar.slug %}" class=" text-white text-left text-[20px] max-w-[150px] transition-colors duration-600 ease-in-out hover:text-yellow-200 additional-text hover:cursor-pointer webinar-name relative" onmouseover="showMainText(this, `{{ webinar.name }}`, `{{ webinar.description }}`)">{{ webinar.name }}</a>
+                    <a href="{% url 'webinar_detail' webinar.slug %}" class=" text-black text-left text-[20px] max-w-[150px] transition-colors duration-600 ease-in-out hover:text-yellow-200 additional-text hover:cursor-pointer webinar-name relative" onmouseover="showMainText(this, `{{ webinar.name }}`, `{{ webinar.description }}`)">{{ webinar.name }}</a>
                 {% endfor %}
             </div>
         </div>

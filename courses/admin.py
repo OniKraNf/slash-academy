@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Lesson, Category, LessonContent
+from .models import Course, Lesson, Category, LessonContent, LessonProgress
 
 # Register your models here.
 @admin.register(Course)
@@ -27,3 +27,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(LessonContent)    
 class LessonContentAdmin(admin.ModelAdmin):
     list_display = ['name']
+    
+    
+@admin.register(LessonProgress)
+class LessonProgressAdmin(admin.ModelAdmin):
+    list_display = ['id', 'watched']

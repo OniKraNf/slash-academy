@@ -10,21 +10,21 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(
         label=('Password'),
         strip=False,
-        widget=PasswordInput(attrs={'class': 'form-control bg-black rounded-md', 'placeholder': 'Enter password'}),
+        widget=PasswordInput(attrs={'class': 'form-control rounded-md', 'placeholder': 'Enter password'}),
     )
     
     password2 = forms.CharField(
         label=('Password'),
         strip=False,
-        widget=PasswordInput(attrs={'class': 'form-control bg-black rounded-md', 'placeholder': 'Confirm password'}),
+        widget=PasswordInput(attrs={'class': 'form-control rounded-md', 'placeholder': 'Confirm password'}),
     )
     
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         widgets = {
-            'username': TextInput(attrs={'class': 'form-control bg-black rounded-md', 'placeholder': 'Enter usename'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control bg-black rounded-md', 'placeholder': 'Enter email'}),
+            'username': TextInput(attrs={'class': 'form-control rounded-md', 'placeholder': 'Enter usename'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control rounded-md', 'placeholder': 'Enter email'}),
         }
         
     def clean_password1(self) -> str:
@@ -37,5 +37,5 @@ class SignUpForm(UserCreationForm):
 
     
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=TextInput(attrs={'class': 'form-control bg-black rounded-md', 'placeholder': 'Enter usename'}))
-    password = forms.CharField(widget=PasswordInput(attrs={'class': 'form-control bg-black rounded-md', 'placeholder': 'Enter password'}))
+    username = forms.CharField(widget=TextInput(attrs={'class': 'form-control rounded-md', 'placeholder': 'Enter usename'}))
+    password = forms.CharField(widget=PasswordInput(attrs={'class': 'form-control rounded-md', 'placeholder': 'Enter password'}))

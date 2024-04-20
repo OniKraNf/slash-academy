@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class=" flex flex-col items-center justify-center h-screen w-screen text-white pb-[150px] header-text">
+    <div class=" flex flex-col items-center justify-center h-screen w-screen pb-[150px] header-text">
         <form method="post" class="flex flex-col gap-5">
             {% csrf_token %}
             <div class="flex flex-col">
@@ -33,7 +33,7 @@
                     <p class="text-red-500">{{ error }}</p>
                 {% endfor %}
             </div>
-            <button type="submit" class="text-xl flex items-center justify-center bg-[#030014] border-[#a2a6c4] border-[1px] pb-[4px] rounded-md">Sign up</button>
+            <button type="submit" class="text-xl flex items-center justify-center py-[5px] border-[#a2a6c4] border-[1px] rounded-md">Sign up</button>
         </form>
     </div>
 {% endblock content %}

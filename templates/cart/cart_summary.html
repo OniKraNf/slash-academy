@@ -2,13 +2,15 @@
 {% load static %}
 {% block content %}
     <section class="header-text mt-20">
-        <div class="flex flex-col max-w-[450px] gap-3 rounded-md container-padding p-3 bg-white">
+        <div class="flex flex-col max-w-[450px] gap-3 border-2 rounded-md container-padding p-3 bg-white">
             {% for course in courses %}
                 <div class="flex flex-row justify-between items-center">
                     <div class="flex gap-2 items-center text-black">
-                        <img class="object-scale-down rounded-md max-h-10 h-10" src="/media/{{course.image}}"/>
-                        <p>{{course.name}}</p> 
-                        <p>{{course.price}}$</p>
+                        <img class="object-cover rounded-md max-h-20 max-w-20 h-20" src="/media/{{course.image}}" width="100"/>
+                        <div class="flex flex-col">
+                            <p>{{course.name}}</p>  
+                            <p>{{course.price}}$</p>
+                        </div>
                     </div>
                     <div class="flex flex-col gap-1 justify-center text-white">
                         <button value="{{ course.slug }}" type="button" class="cart-buy bg-[#4e3eff] rounded-md px-1 py-1 text-[12px]">

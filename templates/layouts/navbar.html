@@ -1,8 +1,8 @@
 {% load static %}
 
 <nav class="z-20 text-xl left-0 right-0">
-    <ul class="flex flex-row justify-between items-center py-5 container-padding">
-        <div class="flex">
+    <ul class="md:flex flex-row justify-between items-center py-5 container-padding hidden md:px-10">
+        <div>
             / academy
         </div>
         <div class="flex flex-row gap-3 justify-center items-center">
@@ -14,7 +14,6 @@
             </li>
             {% if user.is_authenticated %}
                 <a href="/profile/{{request.user.profile.slug}}">{{ request.user.username }}</a>
-                <a href="{% url 'logout' %}">Logout</a>
             {% else %}
                 <li>
                     <a class="" href="{% url 'login' %}">Login</a>
@@ -33,6 +32,18 @@
                 Cart
                 <span id="cart_quantity">{{cart|length}}</span>
             </a>
-        </div>
+            {% if user.is_authenticated %}
+                <button class="border-[#6b7280] border-[1px] px-2 h-[40px] rounded-md">
+                    <a href="{% url 'logout' %}">Logout</a>
+                </button>
+            {% endif %}
+        </div>   
     </ul>
+    <div class="md:hidden flex justify-end items-center w-full">
+        <button id="burger-menu" class="text-black hover:text-gray-400 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+            </svg>
+        </button>
+    </div>
 </nav>

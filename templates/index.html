@@ -24,7 +24,7 @@
         </div>
         <form method="get" action="{% url 'courses:courses_search' %}" class="flex flex-row justify-center gap-2 px-14">
             {% csrf_token %} 
-            <input type="search" name="q" placeholder="Enter course" class="bg-[#f2f2f2] border-[#b5b5b5] w-full text-white flex rounded-md py-3"/>
+            <input type="search" name="q" placeholder="Enter course" class="bg-[#f2f2f2] border-[#b5b5b5] w-full text-back flex rounded-md py-3"/>
             <button type="submit" class="rounded-md text-white bg-[#4e3eff] text-[16px] px-2 w-[150px]">Search</button>
         </form>
         <div class=" flex justify-center items-center">

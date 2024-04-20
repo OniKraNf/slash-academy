@@ -3,9 +3,8 @@ import shutil
 from django.db import models
 from django.dispatch import receiver
 from django.utils import timezone
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save
 from django.utils.text import slugify
-from django.contrib.auth import get_user_model
 from authorization.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -75,6 +74,17 @@ class LessonContent(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     
     
+class LessonProgress(models.Model):
+    lesson_content = models.ForeignKey(LessonContent, on_delete=models.CASCADE, related_name='lesson_progress')
+    watched = models.BooleanField(default=False)
+    
+    
+@receiver(post_save, sender=LessonContent)
+def auto_create_lesson_progress(sender, instance, created, **kwargs):
+    if created:
+        LessonProgress.objects.create(lesson_content=instance)
+        
+        
 @receiver(post_delete, sender=Course)
 def auto_delete_file_course(sender, instance, **kwargs):
     if instance.image:

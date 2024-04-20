@@ -3,27 +3,9 @@
 
 {% block content %}
     <section class="on-top-course flex flex-col gap-32 mt-20 content-container w-full mb-20">
-        <div class="flex text-white bg-[#222222] p-24 rounded-[25px]">
-            <!-- <div class="flex flex-row gap-10 justify-center"> -->
-                <!-- <div class="flex flex-col w-[320px] max-h-[500px] overflow-hidden rounded-md mb-auto"> -->
-                    <!-- <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[260px] object-cover"/> -->
-                    <!-- <div class="p-4"> -->
-                        <!-- <div class="flex justify-between pb-2">
-                            <p class="text-xl font-bold">{{course.price}}$</p>
-                            <button class="p-1" type="button" 
-                            id="add-cart" value="{{ course.slug }}">Add to card</button>
-                        </div> -->
-                        <!-- <p class="font-bold">Includes: </p>
-                        <ul class="list-disc px-3.5">
-                            {% for item in includes %}
-                                <li>{{item}}</li>
-                            {% endfor %}
-                        </ul> -->
-                    <!-- </div> -->
-                <!-- </div> -->
-            <!-- </div> -->
+        <div class="flex text-white bg-[#222222] md:px-28 md:py-16 mx-2 px-5 py-5 rounded-[25px] relative">
             <div class="flex flex-col text-white gap-5 w-full">
-                <div class="flex flex-row justify-between flex-1">
+                <div class="grid grid-cols-1 flex-1">
                     <div class="flex flex-col gap-5 rounded-md">
                         <p class="text-2xl">Start earning money in 7 months</p>
                         <h1 class="text-7xl">{{course.name}}</h1>
@@ -37,16 +19,18 @@
                             <p class="p-2 rounded-md text-2xl font-bold">{{course.price}}$</p>
                         </div>
                     </div>
-                    <div class="">
+                    <img class="md:absolute top-0 right-0 max-w-full rounded-md mt-10 mr-32 object-cover w-[550px] md:h-[500px]
+                    sm:static sm:max-w-none sm:h-auto" src="/media/{{course.image}}" width="500" loading="eager" type="image">
+                    <!-- <div class="">
                         <img src="/media/{{course.image}}" width="600" class="rounded-[25px] h-[420px] object-cover"/>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="flex flex-row gap-5 z-10 mt-10">
-                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] rounded-[25px] text-black px-5 h-[120px]">
+                <div class="flex flex-col justify-center items-center md:justify-start md:flex-row gap-5 z-10 md:mt-36">
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full md:max-w-[250px] rounded-[25px] text-black px-5 h-[120px]">
                         <p class="text-2xl">What i will learn?</p>
                         <p class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.advantages}}</p>
                     </div>
-                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full md:max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
                         <p class="text-2xl">Lessons</p>
                         <div class="rounded-md">
                             <div class="flex justify-between">
@@ -70,11 +54,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full md:max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
                         <p class="text-2xl">Description</p>
                         <p class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.description}}</p>
                     </div>
-                    <div class="flex flex-col gap-3 bg-white justify-center w-full max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
+                    <div class="flex flex-col gap-3 bg-white justify-center w-full md:max-w-[250px] text-black px-5 rounded-[25px] h-[120px]">
                         <p class="text-2xl">Author</p>
                         <div class="flex flex-col gap-2 rounded-md">
                             <p class="whitespace-nowrap overflow-ellipsis overflow-hidden">{{course.author.username}}</p>
@@ -83,14 +67,25 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row px-40">
-            <div class="flex flex-col">
-                <p class="text-[52px] font-bold">Most Popular Language</p>
+        <div class="flex flex-row px-24 gap-10">
+            <div class="flex flex-col gap-5">
+                <p class="text-[52px] pr-10">Most Popular Language</p>
                 <p class="text-[20px] text-[#666]">{{course.description}}</p>
             </div>
             <img class="rounded-[25px]" src="https://intersog.co.il/handling/assets/uploads/2019/08/shutterstock_1225954372.jpg" width="600" alt="">
         </div>
-        
+        <div class="flex flex-row justify-center items-center rounded-[25px] mx-32 py-8 px-4 bg-[#F5F5F5]">
+            <div>
+                <img src="https://cdn.skillbox.pro/landgen/universal_images/110720/sm/34429857-736b-444e-a143-04e289ec9620.png" alt="">
+            </div>
+            <div class="flex flex-col gap-5">
+                <p class="text-4xl">The course meets market needs</p>
+                <p class="text-2xl text-[#666]">It was created as a result of market research among hiring experts</p>
+                <div class="mt-10">
+                    <button class="text-xl bg-[#4e3eff] px-14 py-2 rounded-md text-white ">Sign up</button>
+                </div>
+            </div>
+        </div>
 
 
         <script>
