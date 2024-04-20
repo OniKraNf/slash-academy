@@ -16,6 +16,10 @@ Used Tech Stack
 
 ![SearchCourses](/for_readme/search_courses.png)
 
+### Cart
+
+![Cart](/for_readme/cart.png)
+
 ### Features
 
 - Feature 1
