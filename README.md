@@ -7,12 +7,12 @@ Used Tech Stack
 3. Redis
 4. Celery
 
-## Introduction
+# Introduction
 
-# Main Page
+### Main Page
 ![MainLogo](/for_readme/main_page.png)
 
-# Search
+### Search
 
 ![SearchCourses](/for_readme/search_courses.png)
 
