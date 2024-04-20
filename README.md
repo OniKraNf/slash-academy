@@ -28,17 +28,18 @@ Slash Academy is a web application built with Django that provides online course
 
    ```bash
    git clone https://github.com/your-username/slash-academy.git
-Navigate to the project directory:
+   
+2. Navigate to the project directory:
 
-```bash```
-cd slash-academy
-Run Docker Compose to build and start the containers:
+   ```bash
+   cd slash-academy
 
-bash
-Copy code
-docker-compose up --build
-Apply migrations to create the database schema:
+3. Run Docker Compose to build and start the containers:
 
-bash
-Copy code
-docker-compose exec web python manage.py migrate
+   ```bash
+   docker-compose up --build
+   
+4. Apply migrations to create the database schema:
+
+   ```bash
+   docker-compose exec web python manage.py migrate
