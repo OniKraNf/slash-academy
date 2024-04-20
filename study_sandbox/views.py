@@ -9,6 +9,7 @@ from django.db.models import Sum
 
 from courses.models import Course, LessonContent, LessonProgress
 from slash_academy.models import Enroll
+from .models import Quiz
 
 # Create your views here.
 def study_sandbox(request, course_slug):
@@ -37,3 +38,14 @@ def mark_lesson_watched(request, lesson_content_id):
         return JsonResponse({'message': 'Lesson content marked as watched.'})
     else:
         return JsonResponse({'message': 'Lesson content is already marked as watched.'})
+    
+def get_quiz(request, pk):
+    lesson_content = LessonContent.objects.get(pk=pk)
+    quiz = Quiz.objects.get(lesson_content=lesson_content)  
+    
+    quiz_data = {
+        'name': quiz.name,
+        'questions': [{'text': question.text, 'answers': [{'text': answer.text, 'correct': answer.correct} for answer in question.answer_set.all()]} for question in quiz.question_set.all()]
+    }
+    
+    return JsonResponse({'quiz': quiz_data})

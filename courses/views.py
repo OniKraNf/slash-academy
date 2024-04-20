@@ -39,6 +39,13 @@ class CoursesSearchView(ListView):
     def get_queryset(self) -> QuerySet[Any]:
         query = self.request.GET.get('q', '')
         if query:
-            return self.model.objects.filter(name__icontains = query)
+            queryset = self.model.objects.filter(name__icontains=query)
+            return queryset
         else:
             return self.model.objects.none()
+        
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q', '')
+        context['search_query'] = query
+        return context

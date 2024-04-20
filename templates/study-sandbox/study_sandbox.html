@@ -5,8 +5,17 @@
 {% block content %} 
     <section>
         <div class="md:flex md:flex-row md:justify-between md:items-start sm:flex sm:flex-col xs:mt-20">
-            <div class="md:order-last sm:order-first justify-end sm:h-[600px]">
-                <iframe id="lesson-video" class="w-full md:w-[1000px] md:h-[600px] sm:w-[auto] sm:h-[500px]" src="{{ course.placeholder }}"></iframe>
+            <div class="flex flex-col md:order-last sm:order-first justify-end md:h-auto sm:h-[600px]">
+                {% if course.placeholder %}
+                    <iframe id="lesson-video" class="w-full md:w-[1000px] md:h-[600px] sm:w-[auto] sm:h-[500px]" src="{{ course.placeholder }}"></iframe>
+                {% else %}
+                    <iframe id="lesson-video" class="hidden w-full md:w-[1000px] md:h-[600px] sm:w-[auto] sm:h-[500px]" src="{{ course.placeholder }}"></iframe>
+                {% endif %}
+                <div id="quiz-text-content" class="hidden border-x-2 border-t-2 py-5 justify-center items-center text-2xl">
+
+                </div>
+                <div id="quiz-data" class="hidden flex-col justify-center items-center border-2 pt-10 pb-10 text-2xl gap-5">
+                </div>
             </div>
             <div class="flex flex-col bg-white border-black border-[0.5px] w-full z-30 p-4 gap-5">
                 <h1 class="font-bold text-2xl">Course content</h1>
@@ -19,7 +28,7 @@
                         </button>
                         <div id="dropdown-menu-{{ lesson.id }}" class="gap-1 hidden flex-col border-[#363636] rounded-md p-1 border-2">
                             {% for content in lesson.lessons_content.all %}
-                                <div onclick="changeVideo('{{content.video_url}}')" class="hover:bg-[#bbbbbb] rounded-md p-2">
+                                <div onclick="changeData('{{content.video_url}}', '{{content.text_content}}', '{{content.id}}')" class="hover:bg-[#bbbbbb] rounded-md p-2">
                                     <p>{{ content.name }}</p>
                                     <div class="flex justify-between">
                                         <p>{{ content.duration }} min</p>
@@ -43,6 +52,8 @@
         </div>
     </section>
     <script>
+        // Don't blame me for this code...I'll fix it...
+        // I did here the hell
         function markAsWatched(lessonContentId) {
             fetch(`http://localhost:8000/study-sandbox/mark_lesson_watched/${lessonContentId}/`, {
                 method: "POST",
@@ -79,9 +90,140 @@
             dropdownMenu.classList.toggle('flex');
         }
 
-        function changeVideo(videoUrl) {
+        function changeData(videoUrl, isText, quizId) {
             var videoIframe = document.getElementById('lesson-video');
-            videoIframe.src = videoUrl;
+            var divTextContent = document.getElementById("quiz-text-content")
+
+            if (videoUrl.length > 0) {
+                videoIframe.classList.remove('hidden');
+                videoIframe.src = videoUrl;
+            } else {
+                videoIframe.classList.add('hidden');
+            }
+
+            if (isText.length > 0) {
+                divTextContent.classList.remove('hidden')
+                divTextContent.classList.add('flex')
+                divTextContent.textContent = isText
+            } else {
+                divTextContent.textContent = ''
+                divTextContent.classList.add('hidden')
+            }
+            
+            if (quizId.length > 0) {
+                getQuiz(quizId).then(quizData => {
+                    if (quizData !== null) {
+                        clearDispayedData();
+                        displayQuizData(quizData);
+                    } else {
+                        // Hide divTextContent and quizDiv
+                        const divTextContent = document.getElementById("quiz-text-content");
+                        const quizDiv = document.getElementById("quiz-data");
+                        divTextContent.classList.add('hidden');
+                        quizDiv.classList.add('hidden');
+                    }
+                });
+            }
         }
+
+        function getQuiz(quizId) {
+            return fetch(`http://localhost:8000/study-sandbox/get_quiz/${quizId}/`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+                return response.json();
+            })
+            .then(data => {
+                return data.quiz;
+            })
+            .catch(error => {
+                return null;
+            });
+        }
+
+        function clearDispayedData() { 
+            var quizDiv = document.getElementById('quiz-data');
+
+            quizDiv.innerHTML = '';
+            quizDiv.classList.add('hidden')
+        }
+
+        function displayQuizData(quiz) {
+            var quizDiv = document.getElementById('quiz-data');
+            
+            quizDiv.innerHTML = '';
+            quizDiv.classList.remove('hidden')
+            quizDiv.classList.add('flex')
+
+            var nameHeading = document.createElement('h2');
+            var questionsDiv = document.createElement('form')
+            nameHeading.textContent = quiz.name;
+            quizDiv.appendChild(nameHeading);
+
+            questionsDiv.classList.add('flex', 'flex-row', 'gap-5')
+            questionsDiv.id = 'quiz-form'
+
+            quiz.questions.forEach(question => {
+                var questionForElementDiv = document.createElement('div');
+                var questionElementLabel = document.createElement('label');
+                questionElementLabel.textContent = question.text;
+                questionForElementDiv.classList.add('flex', 'items-center', 'justify-center',)
+                questionForElementDiv.appendChild(questionElementLabel);
+                quizDiv.appendChild(questionForElementDiv)
+
+                question.answers.forEach(answer => {
+                    var answerElementLabel = document.createElement('label');
+                    var answerElementInput = document.createElement('input');
+                    var answerForElementDiv = document.createElement('div');
+                    quizDiv.appendChild(questionsDiv);
+                    answerForElementDiv.classList.add('flex', 'items-center', 'justify-between', 'gap-2')
+                    answerElementLabel.textContent = answer.text;
+                    answerElementInput.type = 'radio'
+                    answerElementLabel.id = answer.text;
+                    answerElementInput.name = 'answer-' + question.id; 
+                    answerElementInput.dataset.correct = answer.correct ? 'true' : 'false';
+                    answerElementInput.dataset.label = answer.text;
+                    answerElementInput.classList.add('mt-1')
+                    answerForElementDiv.appendChild(answerElementLabel);
+                    answerForElementDiv.appendChild(answerElementInput);
+                    questionsDiv.appendChild(answerForElementDiv);
+                })
+
+                var button = document.createElement('button');
+                button.type = 'submit';
+                button.textContent = 'Submit';
+                button.id = 'button-quiz';
+                button.classList.add('border-2', 'p-2', 'rounded-md', 'bg-[#4e3eff]', 'text-white');
+                button.addEventListener('click', handleButtonSubmit);
+                questionsDiv.appendChild(button);
+            })
+        }
+
+        function handleButtonSubmit(event) {
+            event.preventDefault();
+            const quizForm = document.getElementById('quiz-form');
+            const selectedAnswers = quizForm.querySelectorAll('input[type="radio"]:checked');
+
+            selectedAnswers.forEach(answer => {
+                const isCorrect = answer.dataset.correct === 'true';
+                const answerId = answer.dataset.label;
+                const answerLabel = document.getElementById(answerId)
+                const buttonQuiz = document.getElementById('button-quiz')
+                if (isCorrect) {
+                    answerLabel.classList.add('text-green-500')
+                    buttonQuiz.textContent = 'Correct'
+                    buttonQuiz.disabled = true;
+                } else {
+                    console.log('Not true answer')
+                }
+            })
+        };
     </script>
 {% endblock content %}

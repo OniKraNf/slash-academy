@@ -73,6 +73,9 @@ class LessonContent(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     
+    def __str__(self) -> str:
+        return self.name
+    
     
 class LessonProgress(models.Model):
     lesson_content = models.ForeignKey(LessonContent, on_delete=models.CASCADE, related_name='lesson_progress')

@@ -3,8 +3,11 @@
 {% block content %}
   <section class="mt-20">
     <div class="flex flex-col gap-10 justify-center items-center">
-        <p class="text-white text-4xl bg-[#4e3eff] p-3 rounded-md">Search courses</p>
-        {% for course in courses %}
+        {% if search_query %}
+          <p class="text-white text-4xl bg-[#4e3eff] p-3 rounded-md">Search courses: {{ search_query }}</p>
+        {% endif %}
+        <div class="flex flex-row gap-5">
+          {% for course in courses %}
           <a href="{% url 'courses:course_detail' course.slug %}">
             <div class="flex flex-col bg-white w-[250px] h-[330px] overflow-hidden rounded-md mb-auto border-[#c6c6c6] border-2 ">
                 <img src="/media/{{course.image}}" class="w-full rounded-t-md h-[220px] object-cover"/>
@@ -16,6 +19,7 @@
             </div>
          </a>
         {% endfor %}
+        </div>
     </div>
   </section>
 {% endblock content %}
