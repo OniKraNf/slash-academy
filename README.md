@@ -11,6 +11,10 @@ Used Tech Stack
 
 This is a introduction to my project.
 
+## Screenshots
+
+![MainLogo](/media/for_readme/main_page.png)
+
 ### Features
 
 - Feature 1
