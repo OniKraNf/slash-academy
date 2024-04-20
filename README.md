@@ -13,7 +13,7 @@ This is a introduction to my project.
 
 ## Screenshots
 
-![MainLogo](/media/for_readme/main_page.png)
+![MainLogo](/for_readme/main_page.png)
 
 ### Features
 
