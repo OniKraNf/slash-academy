@@ -1,35 +1,44 @@
 # Slash Academy
 
-Used Tech Stack
+Slash Academy is a web application built with Django that provides online courses on various topics.
 
-1. Django
-2. Postgresql
-3. Redis
-4. Celery
+## Features
 
-# Introduction
+- Browse and search for courses
+- Add courses to cart and proceed to checkout
+- User authentication and authorization
+- Admin panel for managing courses and users
+- Browse webinars
+- 
+
+## Screenshots
 
 ### Main Page
-![MainLogo](/for_readme/main_page.png)
+![Main Page](/for_readme/main_page.png)
 
 ### Search
-
-![SearchCourses](/for_readme/search_courses.png)
+![Search Courses](/for_readme/search_courses.png)
 
 ### Cart
-
 ![Cart](/for_readme/cart.png)
 
-### Features
+## Installation
 
-- Feature 1
-- Feature 2
+1. Clone the repository:
 
-#### Installation
+   ```bash
+   git clone https://github.com/your-username/slash-academy.git
+Navigate to the project directory:
 
-1. Clone the repository.
-2. Run `docker-compose up --build`.
-3. Write in exec web `python manage.py makemigrations/migrate`.
-4. Done.
+```bash```
+cd slash-academy
+Run Docker Compose to build and start the containers:
 
-##### Usage
+bash
+Copy code
+docker-compose up --build
+Apply migrations to create the database schema:
+
+bash
+Copy code
+docker-compose exec web python manage.py migrate
