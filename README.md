@@ -27,14 +27,21 @@ Slash Academy is a web application built with Django that provides online course
 
 ## Screenshots
 
-### Main Page
+## Main Page
 ![Main Page](/for_readme/main_page.png)
 
-### Search
+## Search
 ![Search Courses](/for_readme/search_courses.png)
 
-### Cart
+## Course content
+![Course Content](/for_readme/Quizzes.png)
+
+## Cart
 ![Cart](/for_readme/cart.png)
+
+## Course purchase page
+![CoursePurchase](/for_readme/course_page_buy.png)
+
 
 ## Installation
 
