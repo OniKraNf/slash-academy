@@ -1,6 +1,6 @@
 # Slash Academy
 
-Slash Academy is a web application built with Django that provides online courses on various topics.
+Slash Academy is a comprehensive web application built with Docker, Django, Celery, Redis, and Postgresql, offering a wide range of online courses covering various topics.
 
 ## Features
 
