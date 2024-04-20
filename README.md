@@ -9,11 +9,12 @@ Used Tech Stack
 
 ## Introduction
 
-This is a introduction to my project.
-
-## Screenshots
-
+# Main Page
 ![MainLogo](/for_readme/main_page.png)
+
+# Search
+
+![SearchCourses](/for_readme/search_courses.png)
 
 ### Features
 
